@@ -1,0 +1,207 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\usepackage{animate}
+
+% hack to get natbib working with beamer
+\renewcommand{\newblock}{}
+
+% list modifications
+\setlength{\leftmargini}{1em}
+\setlength{\leftmarginii}{1em}
+
+% make $\times$, $+$, $-$ and $=$ use less space
+\newcommand{\tims}{\negthinspace \times \negthinspace}
+\newcommand{\eq}{\negthinspace = \negthinspace}
+\newcommand{\plus}{\negthinspace + \negthinspace}
+\newcommand{\minus}{\text{-}}
+\newcommand{\smallcdot}{\negthinspace \cdot \negthinspace}
+
+\newcommand{\nicefrac}[2]{\ensuremath ^{#1}\!\!/\!_{#2}}
+\usepackage { fancybox}
+
+%% % redefine normalize with different display skips
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\abovedisplayskip{3\p@ \@plus2\p@ \@minus2\p@}
+  \setlength\belowdisplayskip{2\p@ \@plus2\p@ \@minus2\p@}
+  \setlength\abovedisplayshortskip{\z@ \@plus1\p@\@minus6\p@}
+  \setlength\belowdisplayshortskip{\z@ \@plus1\p@\@minus6\p@}
+}
+\makeatother
+\end_preamble
+\options serif,round
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref section
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Implicit and Explicit Time-stepping
+\end_layout
+
+\begin_layout Subtitle
+How it is done in OpenFOAM
+\end_layout
+
+\begin_layout Author
+Hilary Weller
+\end_layout
+
+\begin_layout BeginFrame
+Contents
+\end_layout
+
+\begin_layout Itemize
+Advection equation with source terms
+\end_layout
+
+\begin_layout Itemize
+Shallow water equations (semi-implicit)
+\end_layout
+
+\begin_layout BeginFrame
+Advection Equation with Sources
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial T}{\partial t}+\nabla\cdot\left(\mathbf{u}T\right)=S_{u}+TS_{p}
+\end{equation}
+
+\end_inset
+
+Define volume flux out of a cell
+\begin_inset Formula 
+\begin{equation}
+\phi=\mathbf{u}_{f}\cdot\mathbf{S}_{f}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Shallow Water Equations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{\partial h\mathbf{u}}{\partial t}+\nabla\cdot\left(h\mathbf{u}\mathbf{u}\right) & = & -2h\bm{\Omega}\times\mathbf{u}-gh\nabla\left(h+h_{0}\right)\\
+\frac{\partial h}{\partial t}+\nabla\cdot\left(h\mathbf{u}\right) & = & 0
+\end{eqnarray}
+
+\end_inset
+
+Define mass flux out of a cell
+\begin_inset Formula 
+\begin{equation}
+\phi=\left(h\mathbf{u}\right)_{f}\cdot\mathbf{S}_{f}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+Write equation for the mass flux (by interpolating the momentum equation
+ onto the face and taking dot product with 
+\begin_inset Formula $\mathbf{S}_{f}$
+\end_inset
+
+) and the mass and discretise in time:
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\phi^{(n+1)}-\phi^{(n)}}{\Delta t} & + & \nabla\cdot\left(\phi^{(n)}\mathbf{u}^{(n)}\right)_{f}\cdot\mathbf{S}_{f}\\
+= & - & \left(2h^{(n)}\bm{\Omega}\times\mathbf{u}^{(n)}\right)_{f}\cdot\mathbf{S}_{f}-gh_{f}^{(n)}\nabla_{n}h^{(n+1)}|\mathbf{S}_{f}|\\
+\frac{h^{(n+1)}-h^{(n)}}{\Delta t} & + & \nabla\cdot\phi^{(n+1)}=0
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\end_body
+\end_document

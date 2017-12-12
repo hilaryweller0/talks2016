@@ -1,0 +1,533 @@
+
+\chapter{Modelling Wave Equations}
+
+\liststepwise{
+
+Many of the processes in the atmosphere are represented by the shallow
+water equations (SWE). The assumptions needed to derive the SWE are:
+\begin{itemize}
+\item Horizontal length scale $>>$ vertical length scale
+\item Very small vertical velocities
+\end{itemize}
+Depth integrate the Navier-Stokes equations over orography to give
+the SWE:\step{
+
+\begin{minipage}[c]{0.54\linewidth}%
+\begin{align}
+\frac{D\mathbf{u}}{Dt} & =-2\Omega\times\mathbf{u}-g\nabla(h+h_{0})+\mu_{u}\nabla^{2}\mathbf{u}\label{eqn:SWEuv}\\
+\frac{Dh}{Dt} & +h\nabla\cdot\mathbf{u}=0\label{eqn:SWEh}
+\end{align}
+%
+\end{minipage}\hfill{}%
+\begin{minipage}[c]{0.4\linewidth}%
+ \resizebox{1\columnwidth}{!}{\input{figs/shallowWater.pdftex_t}} %
+\end{minipage}
+
+where \global\long\def\arraystretch{1}
+
+
+\noindent \begin{flushleft}
+\begin{tabular}{llll}
+$\mathbf{u}$  & Depth intetraged wind vector  & $g$  & Acceleration due to gravity\tabularnewline
+$t$  & Time  & $\nabla$ & Gradients in the horizontal\tabularnewline
+$\Omega$  & Rotation rate of planet & $h_{0}$  & Height of the bottom topography\tabularnewline
+$h$  & Fluid depth & $\mu_{u}$  & Diffusion of momentum\tabularnewline
+\end{tabular}
+\par\end{flushleft}
+
+}\step{
+
+\textbf{Exercise: }What are the meaning of the terms of the momentum
+equation of the SWE?
+
+}}
+
+\clearpage{}
+
+
+\section{Simulations of the SWE on the surface of a sphere}
+
+\begin{minipage}[t]{0.24\columnwidth}%
+\vspace{-1pt}
+The shallow-water equations can be solved on the surface of a sphere
+with $\mathbf{u}$ being the horizontal wind (ignoring updrafts and
+downdrafts) and $h$ being the depth of a layer of atmosphere. The
+results look similar to large-scale atmospheric circulation. The vectors
+show $\mathbf{u}$, the black contours show a mountain ($h_{0}$)
+and colours show $h+h_{0}$.%
+\end{minipage} %
+\begin{minipage}[t]{0.74\columnwidth}%
+\vspace{-1pt}
+\mediaMovie[autostart,loop]
+{\includegraphics[width=\linewidth]{/home/hilary/OpenFOAM/hilary-2.3.0/run/shallowWaterSphere/WilliMountain/RinglerLloyd/6/2/129600/hU.pdf}}
+{/home/hilary/OpenFOAM/hilary-2.3.0/run/shallowWaterSphere/WilliMountain/RinglerLloyd/6/2/hU.mp4}%
+\end{minipage}
+
+\clearpage{}
+
+
+\section{Processes Represented by the SWE}
+
+\liststepwise{
+
+Which of these processes are represented by the SWE and which are
+only represented by the full NS equations?
+
+\begin{tabular}{llll}
+Horizontal advection & \opttext{SWE} & Acoustic waves & \opttext{NS}\tabularnewline
+Vertical advection & \opttext{NS} & Coriolis & \opttext{SWE}\tabularnewline
+Gravity waves & \opttext{SWE} & Diffusion & \opttext{SWE}\tabularnewline
+Rossby waves & \opttext{SWE} & Heat transport & \opttext{NS}\tabularnewline
+Adiabatic expansion & \opttext{NS} & Atmospheric convection & \opttext{NS}\tabularnewline
+Geostrophic balance & \opttext{SWE} & Geostrophic turbulence & \opttext{SWE}\tabularnewline
+\end{tabular}
+
+}\clearpage{}
+
+
+\subsection*{Component Form of the SWE}
+
+\liststepwise{
+
+Assuming $\mathbf{u}=(u,v,0)^{T}$ and $2\Omega=(0,0,f)^{T}$, equations
+(\ref{eqn:SWEuv}) and (\ref{eqn:SWEh}) written in component form
+are:\step{
+\begin{eqnarray*}
+\frac{\partial u}{\partial t}+u\frac{\partial u}{\partial x}+v\frac{\partial u}{\partial y} & = & \phantom{-}fv-g\frac{\partial(h+h_{0})}{\partial x}+\mu_{u}\left(\frac{\partial^{2}u}{\partial x^{2}}+\frac{\partial^{2}u}{\partial y^{2}}\right)\\
+\frac{\partial v}{\partial t}+u\frac{\partial v}{\partial x}+v\frac{\partial v}{\partial y} & = & -fu-g\frac{\partial(h+h_{0})}{\partial y}+\mu_{u}\left(\frac{\partial^{2}v}{\partial x^{2}}+\frac{\partial^{2}v}{\partial y^{2}}\right)\\
+\frac{\partial h}{\partial t}+u\frac{\partial h}{\partial x}+v\frac{\partial h}{\partial y}+h\left(\frac{\partial u}{\partial x}+\frac{\partial v}{\partial y}\right)=0 & \text{or} & \frac{\partial h}{\partial t}+\frac{\partial hu}{\partial x}+\frac{\partial hv}{\partial y}=0
+\end{eqnarray*}
+
+
+}}
+
+\clearpage{}
+
+
+\subsection{Linearised SWE}
+
+\liststepwise{
+
+In order to find analytic solutions and to analyse numerical methods,
+we linearise the SWE. \step{ Assume:
+\begin{itemize}
+\item $\mathbf{u}=(u,v,0)^{T}$ is small
+\item 2$\Omega=(0,0,f)^{T}$
+\item $h=H+h^{\prime}$ where $H$ is uniform in space and time and $h^{\prime}$
+is small
+\item the product of two small variables is ignored (even if one or both
+are inside a differential)
+\item $h_{0}$ and $\mu_{u}$ are ignored
+\end{itemize}
+This gives the following equations for $u,$$v$ and $h^{\prime}$
+expressed in terms of $f$ (rather than $\Omega$):}\opttext{
+\begin{eqnarray}
+\frac{\partial u}{\partial t} & = & \phantom{-}fv-g\frac{\partial h^{\prime}}{\partial x}\label{eq:linSWEu}\\
+\frac{\partial v}{\partial t} & = & -fu-g\frac{\partial h^{\prime}}{\partial y}\label{eq:linSWEv}\\
+\frac{\partial h^{\prime}}{\partial t} & = & -H\left(\frac{\partial u}{\partial x}+\frac{\partial v}{\partial y}\right)\label{eq:linSWEh}
+\end{eqnarray}
+
+
+}\step{
+
+
+\section{Analytic Solultion}
+
+Ignoring Coriolis, the linearised SWE have wave-like solutions --
+\textbf{\textit{gravity waves}}. In 1d these are:}\step{ 
+\begin{align}
+h^{\prime} & =\hphantom{\pm\sqrt{g/H}\ }\mathbb{H}\ e^{ikx}\ e^{\pm ikt\sqrt{gH}}\label{eq:hwaves}\\
+u & =\pm\sqrt{g/H}\ \mathbb{H}\ e^{ikx}\ e^{\pm ikt\sqrt{gH}}\label{eq:uwaves}
+\end{align}
+for any constant $\mathbb{H}$. }\step{So waves with wavenumber $k$
+in space oscillate with frequency $k\sqrt{gH}$ and the wave speed
+is ... $\opttext{\sqrt{gH}}$ (so gravity waves are non-dispersive).}}\clearpage{}
+
+
+\section{Unstaggered Forward-Backward (1d A-grid FB)\label{sec:FB_1dA}}
+
+\liststepwise{
+
+As there are two equations that depend on each other, it is quite
+natural to solve them using forward-backward time-stepping -- forward
+for $u$ and backward for $h$. We will also start by assuming that
+$h$ and $u$ are defined at the same spatial positions (this is called
+co-located, unstaggered or A-grid) and we will use centred spatial
+discretisation:
+
+\input{figs/A-grid.pdftex_t}\step{ 
+\begin{align}
+\frac{\partial u}{\partial t} & =-g\frac{\partial h}{\partial x}~\rightarrow & \opttext{\frac{u_{j}^{(n+1)}-u_{j}^{(n)}}{\Delta t}}\ \ \  & =\opttext{-g\frac{h_{j+1}^{(n)}-h_{j-1}^{(n)}}{2\Delta x}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \label{eqn:SWEuFBA}\\
+\frac{\partial h}{\partial t} & =-H\frac{\partial u}{\partial x}~\rightarrow & \opttext{\frac{h_{j}^{(n+1)}-h_{j}^{(n)}}{\Delta t}}\ \ \  & =\opttext{-H\frac{u_{j+1}^{(n+1)}-u_{j-1}^{(n+1)}}{2\Delta x}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \label{eqn:SWEhFBA}
+\end{align}
+where $x_{j}=j\Delta x$, $t^{(n)}=n\Delta t$, $h_{j}^{(n)}=h(x_{j},t^{(n)})$
+and $u_{j}^{(n)}=u(x_{j},t^{(n)})$.
+
+}}\clearpage{}
+
+
+\subsection{Von-Neumann Stability Analysis}
+
+\liststepwise{
+
+We can find the stability limits and dispersion relation for the numerical
+scheme given in section \ref{sec:FB_1dA} (1d A-grid FB) using von-Neumann
+stability analysis. 
+
+\step{To calculate an amplification factor, $A$, for each wavenumber,
+$k$, we assume wave-like solutions for $h$ and $u$: 
+\begin{align}
+h_{j}^{(n)} & =\mathbb{H}~A^{n}~e^{ikj\Delta x}\label{eq:hwave}\\
+u_{j}^{(n)} & =\mathbb{U}~A^{n}~e^{ikj\Delta x}\label{eq:uwave}
+\end{align}
+for some constants $\mathbb{H}$ and $\mathbb{U}$. }\step{Substituting
+these into (\ref{eqn:SWEuFBA}) and (\ref{eqn:SWEhFBA}) and defining
+the Courant number $c=\frac{\sqrt{gH}\Delta t}{\Delta x}$ leads to:
+(workings on lecturer notes)}\step{ 
+\begin{equation}
+A=1-\frac{c^{2}}{2}\sin^{2}k\Delta x\pm\frac{ic}{2}\sin k\Delta x\sqrt{4-c^{2}\sin^{2}k\Delta x}
+\end{equation}
+}\step{There are two solutions for $A$ but this is correct because
+there are also two analytic solutions to the equations (because of
+the $\pm$ in the analytic solution). }\step{ For $|c|\le2$ this
+gives $|A|^{2}=1$ so the scheme is stable and undamping for sufficiently
+small time steps. }\step{However for $|c|>2$ we have: 
+\[
+|A|^{2}=\biggl(1-\frac{c^{2}}{2}\sin^{2}k\Delta x\pm\frac{c}{2}\sin k\Delta x\sqrt{c^{2}\sin^{2}k\Delta x-4}\biggr)^{2}
+\]
+which can be greater than 1 and so the scheme is unstable for $|c|>2$
+where $c=\sqrt{gH}\Delta t/\Delta x$.}\step{
+
+So this scheme is conditionally stable. Stable for $c\le2$.}}
+
+\optpage{
+
+
+\subsection*{Von-Neumann Stability Analysis of Unstaggered Forward-Backward}
+
+Substitute eqns (\ref{eq:hwave}) and (\ref{eq:uwave}) into eqns
+(\ref{eqn:SWEuFBA}) and (\ref{eqn:SWEhFBA}):
+\begin{align*}
+\frac{\mathbb{U}~A^{n+1}~e^{ikj\Delta x}-\mathbb{U}~A^{n}~e^{ikj\Delta x}}{\Delta t} & =-g\frac{\mathbb{H}~A^{n}~e^{ik(j+1)\Delta x}-\mathbb{H}~A^{n}~e^{ik(j-1)\Delta x}}{2\Delta x}\\
+\frac{\mathbb{H}~A^{n+1}~e^{ikj\Delta x}-\mathbb{H}~A^{n}~e^{ikj\Delta x}}{\Delta t} & =-H\frac{\mathbb{U}~A^{n+1}~e^{ik(j+1)\Delta x}-\mathbb{U}~A^{n+1}~e^{ik(j-1)\Delta x}}{2\Delta x}.
+\end{align*}
+Simplify by substituting in the Courant number, $c=\sqrt{gH}\Delta t/\Delta x$,
+cancelling $A^{n}e^{ikj\Delta x}$ and combining $\mathbb{H}$ and
+$\mathbb{U}$:
+\begin{align*}
+A-1 & =-\frac{c}{2}\sqrt{\frac{g}{H}}\sim\frac{\mathbb{H}}{\mathbb{U}}~A\left(e^{ik\Delta x}-e^{-ik\Delta x}\right)\\
+\frac{\mathbb{H}}{\mathbb{U}}\left(A-1\right) & =-\frac{c}{2}\sqrt{\frac{H}{g}}\left(e^{ik\Delta x}-e^{-ik\Delta x}\right).
+\end{align*}
+$\mathbb{H}/\mathbb{U}$ can be eliminated and we can substitute in
+$e^{\pm ik\Delta x}=\cos k\Delta x\pm i\sin k\Delta x$ to get an
+expression for the amplification factor, $A$, in real and imaginary
+parts:
+\begin{align}
+\frac{\mathbb{H}}{\mathbb{U}} & =-ic\sqrt{\frac{H}{g}}~\frac{1}{A-1}\sin k\Delta x\\
+\implies A-1 & =-c^{2}\frac{A}{A-1}\sin^{2}k\Delta x\\
+\implies & A^{2}-A(2-c^{2}\sin^{2}k\Delta x)+1=0\\
+\implies A & =\frac{2-c^{2}\sin^{2}k\Delta x\pm\sqrt{(2-c^{2}\sin^{2}k\Delta x)^{2}-4}}{2}\\
+\implies A & =1-\frac{c^{2}}{2}\sin^{2}k\Delta x\pm\frac{ic\sin k\Delta x}{2}\sqrt{4-c^{2}\sin^{2}k\Delta x{}^{2}}.
+\end{align}
+In order to find the stability of this scheme we need to find the
+magnitude of the amplification factor, $||A||=\sqrt{AA^{*}}$ and
+compare this to one. For the above amplification factor, if $c^{2}\sin^{2}k\Delta x<4$
+$\forall$ $k\Delta x$ then the value inside the square root is positive
+and we can calculate: 
+\begin{eqnarray*}
+||A||^{2} & = & \left(1-\frac{c^{2}}{2}\sin^{2}k\Delta x\right)^{2}+\frac{c^{2}\sin^{2}k\Delta x}{4}\left(4-c^{2}\sin^{2}k\Delta x{}^{2}\right)\\
+ & = & 1-c^{2}\sin^{2}k\Delta x+\frac{c^{4}}{4}\sin^{4}k\Delta x+c^{2}\sin^{2}k\Delta x-\frac{c^{4}}{4}\sin^{4}k\Delta x\\
+ & = & 1.
+\end{eqnarray*}
+So for $c<2$ this scheme is stable and does not damp waves of any
+frequency. However for $c>2$, $||A||$ can be greater that 1 for
+some values of $k\Delta x$ so the scheme is unstable.
+
+}
+
+\clearpage{}
+
+
+\subsection{Dispersion of Unstaggered Forward-Backward (1d A-grid FB)}
+
+\liststepwise{
+
+A reminder of the amplification factor for this method:
+\[
+A=1-\frac{c^{2}}{2}\sin^{2}k\Delta x\pm\frac{ic}{2}\sin k\Delta x\sqrt{4-c^{2}\sin^{2}k\Delta x}.
+\]
+The argument of $A$ gives us the wave frequency as a function of
+wavenumber:\step{ 
+\begin{equation}
+\omega=\tan^{-1}\frac{\frac{c}{2}\sin k\Delta x\sqrt{4-c^{2}\sin^{2}k\Delta x}}{1-\frac{c^{2}}{2}\sin^{2}k\Delta x}
+\end{equation}
+}\step{This can be simplified by assuming that $\frac{c}{2}\sin k\Delta x=\sin\alpha$
+to give:}\step{ 
+\begin{equation}
+\omega=\pm2\alpha=\pm2\sin^{-1}\bigl(\frac{c}{2}\sin k\Delta x\bigr)
+\end{equation}
+
+
+}\step{%
+\begin{minipage}[t]{0.49\columnwidth}%
+\vspace{-1pt}
+This is the A-grid dispersion relation:
+
+\vspace{2cm}
+
+
+Grid-scale gravity waves ($k\Delta x/\pi=1$) have zero frequency!
+This is highly unrealistic.%
+\end{minipage} %
+\begin{minipage}[t]{0.49\columnwidth}%
+\vspace{-1pt}
+\includegraphics[width=1\linewidth]{figs/A_dispersion}%
+\end{minipage}
+
+}}
+
+\clearpage{}
+
+
+\section{Problems with Co-location of $h$ and $u$}
+
+\liststepwise{
+
+Consider the following initial conditions of the linearised non-rotating
+SWE:
+
+\resizebox{0.48\linewidth}{!}{\input{figs/AgridMode.pdftex_t}} \hfill{}\resizebox{0.48\linewidth}{!}{\input{figs/AgridMode_u.pdftex_t}}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item \step{How do you expect the real solution of the linearised SWE to
+evolve?}
+
+
+\opttext{High-frequency waves will be generated that propagate in both directions. The solution will oscillate between having non-zero $h^\prime$ and non-zero $u$.}\vspace{2cm}
+\step{
+
+\item How will the solution of the 1d A-grid FB scheme evolve?}
+
+
+\opttext{The solution will not change after initialisation. The grid-scale wave in $h^\prime$ will remain. No non-zero $u$ will be generated.}
+
+\end{enumerate}
+}
+
+\clearpage{}
+
+
+\section{Staggered Forward-Backward (1d C-grid FB)\label{sec:FB_1dC}}
+
+\liststepwise{
+
+So that gradients of $h$ can be calculated where $u$ is located
+and gradients of $u$ can be calculated where $h$ is located, $h$
+and $u$ can be staggered in space:\\
+\hspace{3cm}\scalebox{0.75}[0.75]{\input{figs/C-grid.pdftex_t}}\step{
+
+Using centered, 2-point spatial differences and forward-backward in
+time gives: 
+\begin{align}
+\frac{\partial u}{\partial t} & =-g\frac{\partial h}{\partial x}~~\rightarrow & \opttext{\frac{u_{j+\half}^{(n+1)}-u_{j+\half}^{(n)}}{\Delta t}}\ \ \  & =\opttext{-g\frac{h_{j+1}^{(n)}-h_{j}^{(n)}}{\Delta x}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \label{eqn:SWEuFBC}\\
+\frac{\partial h}{\partial t} & =-H\frac{\partial u}{\partial x}~~\rightarrow & \opttext{\frac{h_{j}^{(n+1)}-h_{j}^{(n)}}{\Delta t}}\ \ \  & =\opttext{-H\frac{u_{j+\half}^{(n+1)}-u_{j-\half}^{(n+1)}}{\Delta x}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \label{eqn:SWEhFBC}
+\end{align}
+}\step{Von-Neumann stability analysis gives:}
+\begin{itemize}
+\item \step{$|A|=\begin{cases}
+1 & \text{for }|c|\le1\\
+>1 & \text{for }|c|>1\text{ for some }k\Delta x
+\end{cases}$ 
+
+
+$\therefore$ neutrally stable for $|c|\le1$}\step{
+
+\item Dispersion relation:\\
+$\omega=\pm2\alpha=\pm2\sin^{-1}\bigl(c\sin\frac{k\Delta x}{2}\bigr)$\textbf{\hfill{}}\raisebox{-0.12\linewidth}[0pt][0pt]{\includegraphics[width=0.48\linewidth]{figs/AC_dispersion}}}\step{
+\item $\therefore$ the C-grid is dispersive
+\item grid-scale waves propagate too slowly}\step{
+\item C-grid widely used in atmosphere and ocean models }\step{
+\item What about in 2d?}
+\end{itemize}
+}
+
+\clearpage{}
+
+
+\section{Arakawa Grids}
+
+\liststepwise{
+
+In two dimensions, there are more possibilities for where the prognostic
+variables are located:
+
+\begin{tabular}{ccc}
+A-grid & B-grid & C-grid \\
+\ifthenelse{\boolean{@onlineversion}}%
+{\switch{\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/grid.pdftex_t}}}
+       {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/A.pdf_t}}}}
+{\ifthenelse{\boolean{@studentversion}}%
+    {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/grid.pdftex_t}}}
+    {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/A.pdf_t}}}}
+&
+\ifthenelse{\boolean{@onlineversion}}%
+{\switch{\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/grid.pdftex_t}}}
+       {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/B.pdf_t}}}}
+{\ifthenelse{\boolean{@studentversion}}%
+    {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/grid.pdftex_t}}}
+    {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/B.pdf_t}}}}
+&
+\ifthenelse{\boolean{@onlineversion}}%
+{\switch{\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/grid.pdftex_t}}}
+       {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/C.pdf_t}}}}
+{\ifthenelse{\boolean{@studentversion}}%
+    {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/grid.pdftex_t}}}
+    {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/C.pdf_t}}}}
+\\
+D-grid & E-grid &  \\
+\ifthenelse{\boolean{@onlineversion}}%
+{\switch{\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/grid.pdftex_t}}}
+       {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/D.pdf_t}}}}
+{\ifthenelse{\boolean{@studentversion}}%
+    {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/grid.pdftex_t}}}
+    {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/D.pdf_t}}}}
+&
+\ifthenelse{\boolean{@onlineversion}}%
+{\switch{\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/grid.pdftex_t}}}
+       {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/E.pdf_t}}}}
+{\ifthenelse{\boolean{@studentversion}}%
+    {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/grid.pdftex_t}}}
+    {\resizebox{0.3\textwidth}{!}{\input{figs/Arakawa/E.pdf_t}}}}
+\end{tabular}
+
+}\clearpage{}
+
+
+\section{Linearised Shallow-Water Equations on Arakawa Grids}
+
+The linearised SWE with rotation are:
+\begin{align*}
+\partial\mathbf{u}/\partial t & =-2\Omega\times\mathbf{u}-g\nabla h\\
+\partial h^{\prime}/\partial t & +H\nabla\cdot\mathbf{u}=0
+\end{align*}
+
+\begin{itemize}
+\item The linearised SWE are solved numerically on Arakawa A, B and C grids,
+starting from initial conditions consisting of zero velocity and zero
+$h^{\prime}$ everywhere except a positive $h^{\prime}$ in one central
+grid-box
+\item The colours show $h^{\prime}$ in the grid boxes. Red/yellow positive,
+blue negative, white zero
+\end{itemize}
+\stepwise{
+\begin{tabular}{ccc}
+A-grid & B-grid & C-grid \\
+\switch{\includegraphics[width=0.3\linewidth]{figs/2dSWE/Agrid1.pdf}}
+{\movie*{10}{1}{\includegraphics[width=0.3\linewidth]{figs/2dSWE/Agrid\thesubstep.pdf}}}
+&
+\switch{\includegraphics[width=0.3\linewidth]{figs/2dSWE/Bgrid1.pdf}}
+{\movie*{10}{1}{\includegraphics[width=0.3\linewidth]{figs/2dSWE/Bgrid\thesubstep.pdf}}}
+&
+\switch{\includegraphics[width=0.3\linewidth]{figs/2dSWE/Cgrid1.pdf}}
+{\movie*{10}{1}{\includegraphics[width=0.3\linewidth]{figs/2dSWE/Cgrid\thesubstep.pdf}}}
+\end{tabular}
+}
+
+\liststepwise{\step{
+
+
+\section{Discussion Question}
+
+For solving the 2d, linearised rotating SWE (eqns \ref{eq:linSWEu}-\ref{eq:linSWEh})
+what are the advantages and disadvantages of the different grids?
+Which terms or which balances between terms will be represented accurately
+by different grids?}}
+
+
+\section{Exercise\label{sec:ex_impGrav}}
+
+We have found that the numerical methods for solving the shallow water
+equations using forward-backward time-stepping have time-step restrictions
+based on the Courant number (defined with respect to the gravity wave
+speed). In the atmosphere, gravity waves can travel very quickly,
+up to about 300m/s - nearly as fast as acoustic waves. Complete models
+of the compressible atmosphere also support acoustic waves. We do
+not want the time-step of our models to be constrained by these very
+fast waves. Therefore, often, models are semi-implicit, which means
+that fast waves (such as acoustic and gravity waves) are treated implicitly
+whereas slow processes (such as advection and Coriolis) are treated
+explicitly. An implicit, co-located finite difference method for the
+one-dimensional, linearised, non-rotating shallow water equations
+is:
+\begin{align}
+\frac{u_{j}^{(n+1)}-u_{j}^{(n)}}{\Delta t} & =-g\frac{h_{j+1}^{(n+1)}-h_{j-1}^{(n+1)}}{2\Delta x}\label{eqn:SWEuBA}\\
+\frac{h_{j}^{(n+1)}-h_{j}^{(n)}}{\Delta t} & =-H\frac{u_{j+1}^{(n+1)}-u_{j-1}^{(n+1)}}{2\Delta x}\label{eqn:SWEhBA}
+\end{align}
+with the usual notation.
+\begin{enumerate}
+\item Use von-Neumann stability analysis to find the time-step restrictions
+of this scheme.
+\item What problems does this scheme have in comparison to a staggered (or
+C-grid) scheme?
+\end{enumerate}
+\optpage{
+
+Answers to Exercise \ref{sec:ex_impGrav}
+\begin{enumerate}
+\item Substituting $h_{j}^{(n)}=\mathbb{H}~A^{n}~e^{ikj\Delta x}$ and $u_{j}^{(n)}=\mathbb{U}~A^{n}~e^{ikj\Delta x}$
+into the equations for the scheme gives:
+\begin{align*}
+\frac{\mathbb{U}~A^{n+1}~e^{ikj\Delta x}-\mathbb{U}~A^{n}~e^{ikj\Delta x}}{\Delta t} & =-g\frac{\mathbb{H}~A^{n+1}~e^{ik(j+1)\Delta x}-\mathbb{H}~A^{n+1}~e^{ik(j-1)\Delta x}}{2\Delta x}\\
+\frac{\mathbb{H}~A^{n+1}~e^{ikj\Delta x}-\mathbb{H}~A^{n}~e^{ikj\Delta x}}{\Delta t} & =-H\frac{\mathbb{U}~A^{n+1}~e^{ik(j+1)\Delta x}-\mathbb{U}~A^{n+1}~e^{ik(j-1)\Delta x}}{2\Delta x}.
+\end{align*}
+We can simplify by substituting in the Courant number, $c=\sqrt{gH}\Delta t/\Delta x$,
+cancelling $A^{n}e^{ikj\Delta x}$ and combining $\mathbb{H}$ and
+$\mathbb{U}$:
+\begin{align*}
+A-1 & =-\frac{c}{2}\sqrt{\frac{g}{H}}\sim\frac{\mathbb{H}}{\mathbb{U}}~A\left(e^{ik\Delta x}-e^{-ik\Delta x}\right)\\
+\frac{\mathbb{H}}{\mathbb{U}}\left(A-1\right) & =-\frac{c}{2}\sqrt{\frac{H}{g}}~A\left(e^{ik\Delta x}-e^{-ik\Delta x}\right).
+\end{align*}
+$\mathbb{H}/\mathbb{U}$ can be eliminated and we can substitute in
+$e^{\pm ik\Delta x}=\cos k\Delta x\pm i\sin k\Delta x$ to get an
+expression for the amplification factor, $A$, in real and imaginary
+parts:
+\begin{align}
+\frac{\mathbb{H}}{\mathbb{U}} & =-ic\sqrt{\frac{H}{g}}~\frac{A}{A-1}\sin k\Delta x\\
+\implies A-1 & =-c^{2}\frac{A^{2}}{A-1}\sin^{2}k\Delta x\\
+\implies & A^{2}\left(1+c^{2}\sin^{2}k\Delta x\right)-2A+1=0\\
+\implies A & =\frac{1\pm\sqrt{1-\left(1+c^{2}\sin^{2}k\Delta x\right)}}{1+c^{2}\sin^{2}k\Delta x}\\
+\implies A & =\frac{1\pm ic\sin k\Delta x}{1+c^{2}\sin^{2}k\Delta x}.
+\end{align}
+In order to find the stability of this scheme we need to find the
+amplitude of the amplification factor:
+\begin{eqnarray*}
+||A||^{2} & = & AA^{*}\\
+ & = & \frac{1+c^{2}\sin^{2}k\Delta x}{\left(1+c^{2}\sin^{2}k\Delta x\right)^{2}}\\
+ & = & \frac{1}{1+c^{2}\sin^{2}k\Delta x}.
+\end{eqnarray*}
+Thus $||A||^{2}\le1\ \forall\ c$ and $\forall\ k\Delta x$. Thus
+this implicit scheme is unconditionally stable (stable for all time-steps).
+\item This co-located scheme has $u$ and $h$ stored at the same locations
+and spatial gradients are always calculated centred on a variable,
+missing out the variable in the middle. Consequently, grid-scale oscillations
+do not influence the gradients and hence grid-scale oscillations do
+not lead to changes in $u$ or $h$. In the linear shallow-water equations,
+all waves should propagate with speed $\sqrt{gH}$ but with this scheme,
+grid-scale waves (of wave-length $2\Delta x$) do not propagate all.
+Thus the scheme suffers from a spurious, stationary computational
+mode. This can also be seen by calculating the dispersion relation
+for the scheme, which shows that waves of length $2\Delta x$ are
+stationary. This problem is solved by using a staggered grid, with
+$u$ and $h$ stored at locations off-set from each other by $\Delta x/2$.
+For the shallow-water equations, it is necessary to calculate $\partial h/\partial x$
+where $u$ is stored and to calculate $\partial u/\partial x$ where
+$h$ is stored. Consequently we will calculate $\partial h/\partial x$
+at the mid-points between storage locations for $h$ and the same
+for $u$. Thus the calculations of $\partial h/\partial x$ and $\partial u/\partial x$
+will not miss out the central points; they will be compact. Any oscillations
+in $u$ or $h$ will lead to non-zero spacial gradients and will hence
+lead to changes in $u$ and $h$. Therefore there is no stationary
+computational mode.
+\end{enumerate}
+}

@@ -1,0 +1,117 @@
+\cleardoublepage{}
+
+
+\chapter{Semi-Implicit Time-Stepping}
+
+
+\subsection*{Recap Some Advantages \textmd{(and implied disadvantages) of aspects
+of time-stepping}}
+
+\liststepwise{
+
+\begin{tabular}{|>{\centering}p{0.48\textwidth}|>{\centering}p{0.48\textwidth}|}
+\hline 
+\textbf{Implicit} & \textbf{Explicit}\tabularnewline
+\hline 
+\step{Stable for Courant number $>>1$}\vspace{10pt}
+ & \step{Cheap}\vspace{10pt}
+\tabularnewline
+\hline 
+\hline 
+\textbf{Short time-steps} & \textbf{Long time-steps}\tabularnewline
+\hline 
+\step{Accurate}\vspace{10pt}
+ & \step{Cheap}\vspace{10pt}
+\tabularnewline
+\hline 
+\end{tabular}
+
+
+\subsection*{Modelling Considerations}
+
+\begin{minipage}[t]{0.48\columnwidth}%
+We can afford this setup for our model:
+
+\begin{tabular}{|c|c|}
+\hline 
+$\Delta x$, $\Delta y$ & 10km\tabularnewline
+\hline 
+$\Delta z$ & 200m\tabularnewline
+\hline 
+$\Delta t$ & 1 minute\tabularnewline
+\hline 
+\end{tabular}%
+\end{minipage} %
+\begin{minipage}[t]{0.48\columnwidth}%
+The atmosphere has the following speeds:
+
+\begin{tabular}{|l|>{\centering}m{0.3\textwidth}|}
+\hline 
+Acoustic wave speed & \opttext{340m/s}\tabularnewline
+\hline 
+Gravity wave speed & \opttext{$\le$300m/s}\tabularnewline
+\hline 
+Horizontal wind & \opttext{$\le$80m/s}\tabularnewline
+\hline 
+Vertical wind & \opttext{$\le$1m/s}\tabularnewline
+\hline 
+\end{tabular}%
+\end{minipage}
+
+What Courant numbers will these speeds and resolutions lead to? What
+are the implications for choices of explicit and implicit time-stepping
+(assuming that explicit schemes are typically stable for Courant numbers
+less than one)?}\clearpage{}
+
+\begin{tabular}{|>{\raggedright}p{0.15\textwidth}|>{\centering}p{0.2\textwidth}|>{\raggedright}p{0.55\textwidth}|}
+\hline 
+ & \textbf{Maximum Courant number} & \textbf{Implication}\tabularnewline
+\hline 
+\hline 
+\textbf{Horizontal acoustic } & \lecText{$340\times60/10^{3}\approx2$} & \lecText{Treat horizontal acoustic waves implicitly, use a shorter
+time-step or use sub-stepping (split-explicit)}\tabularnewline
+\hline 
+\textbf{Vertical acoustic} & \lecText{$340\times60/200\approx100$} & \lecText{Vertically propaganing acoustic waves must be treated implicitly}\tabularnewline
+\hline 
+\textbf{Gravity wave} & \lecText{$300\times60/10^{3}\approx2$} & \lecText{Treat gravity waves implicitly, use a shorter time-step
+or use sub-stepping (split-explicit)}\tabularnewline
+\hline 
+\textbf{Horizontal wind} & \lecText{$80\times60/10^{3}\approx0.5$} & \lecText{Can be treated explicitly (unless you are on a lat-lon grid)}\tabularnewline
+\hline 
+\textbf{Vertical Wind} & \lecText{$1\times60/200\approx0.3$} & \lecText{Can be treated explicitly as long as you do not try to resolve
+convection or other processes which will increase the maximum vertical
+wind.}\tabularnewline
+\hline 
+\end{tabular}
+
+\clearpage{}
+
+Treating gravity and acoustic wave implicitly and advection (and possibly
+Coriolis) explicitly is called \textbf{semi-implicit}. For the shallow-water
+equations, if we treat gravity waves using backward Euler and advection
+and Coriolis with forward Euler, mark which terms are evaluated at
+time-level $n$ and which at time-level $n+1$.\liststepwise{
+\begin{align}
+\frac{\mathbf{u}^{(n+1)}-\mathbf{u}^{(n)}}{\Delta t}+\mathbf{u}^{(\opttext{n\ \ })}\cdot\nabla\mathbf{u}^{(\opttext{n\ \ })} & =-2\Omega\times\mathbf{u}^{(\opttext{n\ \ })}-g\nabla h^{(\opttext{n+1})}\label{eqn:SWEuvtime}\\
+\frac{h^{(n+1)}-h^{(n)}}{\Delta t}+\mathbf{u}^{(\opttext{n\ \ })}\cdot\nabla h^{(\opttext{n\ \ })} & =-h^{(\opttext{n\ \ })}\nabla\cdot\mathbf{u}^{(\opttext{n+1})}\label{eqn:SWEhtime}
+\end{align}
+This is solved by rearranging equation \ref{eqn:SWEuvtime} for $u^{(n+1)}$
+and substituting these into equation \ref{eqn:SWEhtime}. This leads
+to a semi-discretised version of the wave equation (\ref{eq:linSWEh})
+or Helmholtz equation which can be solved for $h^{(n+1)}$. 
+\begin{align*}
+\mathbf{u}^{(n+1)} & =\opttext{\mathbf{u}^{(n)}-\Delta t\bigl(\mathbf{u}^{(n)}\cdot\nabla\mathbf{u}^{(n)}+2\Omega\times\mathbf{u}^{(n)}+g\nabla h^{(n+1)}\bigr)}
+\end{align*}
+\begin{align*}
+\implies & \frac{h^{(n+1)}-h^{(n)}}{\Delta t}+\mathbf{u}^{(n)}\cdot\nabla h^{(n)}\\
+ & =-h^{(n)}\nabla\cdot\biggr(\opttext{\mathbf{u}^{(n)}-\Delta t\bigl(\mathbf{u}^{(n)}\cdot\nabla\mathbf{u}^{(n)}+2\Omega\times\mathbf{u}^{(n)}+g\nabla h^{(n+1)}\bigr)}\biggr)
+\end{align*}
+The terms that make this into a Helmholtz equation are: 
+\[
+\frac{h^{(n+1)}-h^{(n)}}{\Delta t}=h^{(n)}\nabla\cdot\biggr(\Delta tg\nabla h^{(n+1)}\biggr)+\ldots=\Delta tgh^{(n)}\nabla^{2}h^{(n+1)}+\ldots
+\]
+which must be solved implicitly since $h^{(n+1)}$ appears on the
+RHS and LHS.
+
+A similar procedure is used to solve the Navier-Stokes equations in
+semi-implicit models of the global atmosphere.}

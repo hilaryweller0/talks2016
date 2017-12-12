@@ -1,0 +1,19 @@
+\begin{picture}(0,0)%
+\includegraphics{figs/shallowWater}%
+\end{picture}%
+\setlength{\unitlength}{3947sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(9712,4957)(2686,-6383)
+\put(3961,-3811){\makebox(0,0)[lb]{\smash{{\SetFigFont{48}{57.6}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\mathbf{u}$}%
+}}}}
+\put(8176,-4111){\makebox(0,0)[lb]{\smash{{\SetFigFont{48}{57.6}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$h$}%
+}}}}
+\put(8431,-5416){\makebox(0,0)[lb]{\smash{{\SetFigFont{48}{57.6}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$h_0$}%
+}}}}
+\end{picture}%

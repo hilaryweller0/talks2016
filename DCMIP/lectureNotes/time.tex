@@ -1,0 +1,221 @@
+
+\chapter{Time-Stepping}
+
+\liststepwise{Any system of evolution equations can be written as
+\[
+\frac{dy}{dt}=F(y)
+\]
+where $y$ is a list of all dependent variables at all points in space
+and $F$ describes how they all evolve. There are thousands of time-stepping
+schemes. Eg:\\
+\begin{tabular}{>{\raggedright}m{0.18\textwidth}>{\raggedright}p{0.32\textwidth}|>{\centering}m{0.1\textwidth}|>{\centering}m{0.1\textwidth}|>{\centering}m{0.13\textwidth}}
+ &  & Explicit/ Implicit  & Order of accuracy & Multi stage/ step/neither\tabularnewline
+\hline 
+Forward Euler & ${\textstyle y^{(n+1)}=y^{(n)}+\opttext{\Delta tF(y^{(n)})}}$ & \opttext{E} & 1 & \opttext{neither}\tabularnewline
+\hline 
+Backward Euler & ${\textstyle y^{(n+1)}=y^{(n)}+\opttext{\Delta tF(y^{(n+1)})}}$ & \opttext{I} & 1 & \opttext{neither}\tabularnewline
+\hline 
+Trapezoidal{\footnotesize{} (Crank-Nicholson)} & ${\textstyle y^{(n+1)}=y^{(n)}}$ $\ {\textstyle +\frac{\Delta t}{2}(F(y^{(n)})+F(y^{(n+1)}))}$ & \opttext{I} & 2 & \opttext{neither}\tabularnewline
+\hline 
+Forward-backward & ${\textstyle y^{\prime}=y^{(n)}+\opttext{\Delta tF(y^{(n)})}}$ ${\textstyle y^{(n+1)}=y^{(n)}+\opttext{\Delta tF(y^{\prime})}}$ & \opttext{E} & 1/2 & \opttext{stage}\tabularnewline
+\hline 
+Leapfrog {\footnotesize{}}\\
+{\footnotesize{}(centred in time)} & ${\textstyle y^{(n+1)}=y^{(n-1)}+2\Delta tF(y^{(n)})}$ & \opttext{E} & 2 & \opttext{step}\tabularnewline
+\end{tabular}
+
+\textbf{Explicit }-- uses values from previous time-steps to define
+the values at the new time-level.
+
+\textbf{Implicit }-- uses values at time level $n+1$ and possibly
+other time levels to define the values at time-level $n+1$.
+
+\textbf{Multi-step} -- uses values from more that 2 time-levels.
+
+\textbf{Multi-stage (Runge-Kutta) }-- Calculates intermediate values
+in between levels $n$ and $n+1$.
+
+}
+
+\clearpage{}
+
+\liststepwise{
+
+\begin{tabular}{>{\raggedright}m{0.08\textwidth}>{\raggedright}p{0.47\textwidth}|>{\centering}m{0.1\textwidth}|>{\centering}m{0.1\textwidth}|>{\centering}m{0.11\textwidth}}
+ &  & Explicit/ Implicit  & Order of accuracy & Multi stage/ step\tabularnewline
+\hline 
+RK4 & ${\textstyle \begin{array}{c}
+k_{1}=\Delta tF(y^{(n)}),\ k_{2}=\Delta tF(y^{(n)}+\frac{1}{2}k_{1})\\
+k_{3}=\Delta tF(y^{(n)}+\frac{1}{2}k_{2}),\ k_{4}=\Delta tF(y^{(n)}+k_{3})\\
+y^{(n+1)}=y^{(n)}+\frac{1}{6}(k_{1}+2k_{2}+2k_{3}+k_{4})
+\end{array}}$ & \opttext{E} & 4 & \opttext{stage}\tabularnewline
+\hline 
+Adams-Bashforth & ${\textstyle y^{(n+1)}=y^{(n)}+\frac{\Delta t}{2}\left(3F(y^{(n)})-F(y^{(n-1)})\right)}$ & \opttext{E} & 2 & \opttext{step}\tabularnewline
+\hline 
+BDF2 & ${\textstyle y^{(n+1)}=\frac{4}{3}y{}^{(n)}-\frac{1}{3}y^{(n-1)}+\Delta t\frac{2}{3}F(y^{(n+1)})}$ & \opttext{I} & 2 & \opttext{step}\tabularnewline
+\end{tabular}
+
+
+\subsubsection*{Advantage of Multi-step over Multi-stage}
+
+\opttext{Fewer function evaluations needed to achieve the same order accuracy}\ 
+
+
+\subsubsection*{How can an Implicit scheme be used?}
+
+Re-arrange backward Euler: $y^{(n+1)}-\Delta tF(y^{(n+1)})=y^{(n)}$
+
+Define a new function: $(I-\Delta tF)$ where $I$ is the identity
+
+$y^{(n+1)}=\opttext{(I-\Delta tF)^{-1}y^{(n)}}$
+
+$F$ needs to be a linear function so that $(I-\Delta tF)$ is an
+invertible matrix
+
+
+\subsubsection*{Advantage of Explicit over Implicit}
+
+
+\subsubsection*{\textmd{\opttext{No need to invert a big matrix $\therefore$ cheaper per time-step}\ }}
+
+
+\subsubsection*{Advantage of Implicit? ... Advantage of Multi-stage? ...}
+
+}
+
+\clearpage{}
+
+
+\section{Stability Analysis of Leapfrog}
+
+\liststepwise{
+
+To analyse the stability of a time-stepping scheme for solving a wave
+or advection equation, we analyse how the scheme behaves for the 1D
+oscillation equation:
+\begin{equation}
+\frac{dy}{dt}=i\kappa y
+\end{equation}
+where $i=\sqrt{-1}$ so that the leapfrog scheme becomes
+\begin{equation}
+y^{(n+1)}=\opttext{y^{(n-1)}+i2\Delta t\kappa y^{(n)}}.\label{eq:LF_osc}
+\end{equation}
+We define an amplification factor, $A$, such that:
+\begin{equation}
+y^{(n+1)}=Ay^{(n)},\ y^{(n)}=Ay^{(n-1)},\ y^{(n+1)}=A^{2}y^{(n-1)}.\label{eq:amp}
+\end{equation}
+
+
+\textbf{The scheme will be stable if $|A|\opttext{\le1}$ }
+
+Substitute the amplification factors in eqn (\ref{eq:amp}) into eqn(\ref{eq:LF_osc})
+and rearrange to find $A$ and $|A|$:}\optparagraph{
+\begin{align*}
+A^{2}y^{(n-1)} & =y{}^{(n-1)}+i2\Delta t\kappa Ay^{(n-1)}\\
+\implies & A^{2}-i2\Delta t\kappa A-1=0\\
+\implies & A=i\kappa\Delta t\pm\sqrt{1-\kappa^{2}\Delta t^{2}}\\
+\implies & |A|\ \begin{cases}
+=1 & \text{if }\kappa\Delta t\le1\\
+>1 & \text{if }\kappa\Delta t>1
+\end{cases}
+\end{align*}
+}So leapfrog is stable for $\Delta t\le1/\kappa$. But the existence
+of two possible solutions for $A$ means that spurious solutions -
+computational modes - exist which can contaminate the solution.
+
+\clearpage{}
+
+
+\subsection{Simulation of a Damped Pendulum}
+
+Angle of pendulum, $\theta$, satisfies
+\[
+\frac{d^{2}\theta}{dt^{2}}+\frac{\alpha}{L}\frac{d\theta}{dt}+\frac{g}{L}\sin\theta=0
+\]
+where $L=1$, $g=9.81$, $\alpha=0.03$
+
+\begin{tabular}{>{\centering}p{0.5\textwidth}>{\centering}p{0.5\textwidth}}
+Leapfrog & RK4\tabularnewline
+\mediaMovie{\includegraphics[width=0.48\textwidth]{animations/lf.png}}{../animations/pendulum_lf.mp4} & \mediaMovie{\includegraphics[width=0.48\textwidth]{animations/rk4.png}}{../animations/pendulum_rk4.mp4}\tabularnewline
+\end{tabular}
+
+\liststepwise{
+\begin{itemize}
+\item \step{The leapfrog simulation jumps between the physical mode and
+the computational mode}\step{
+\item Can be controlled with a filter \citep[see eg][]{Wil09}}
+\end{itemize}
+}
+
+\clearpage{}
+
+
+\subsection{Stability Analysis of Euler Forward and Backward}
+
+\textbf{Exercise} We will analyse the stability of Euler forward and
+Euler backward for both the oscillation equation (to mimic wave equations
+and advection) and for the equation that simulations exponential decay
+(to mimic diffusion):
+\[
+\frac{dy}{dt}=-\kappa y
+\]
+Choose one of the schemes and one of the differential equations. So
+that we get answers for all four possibilities, make sure that your
+choices are different from 3 of your neighbours.
+
+\liststepwise{
+
+\textbf{Stability Constraints for Euler forward and backward}
+
+\begin{tabular}{|c|c||c|c|}
+\hline 
+ &  & Euler forward & Euler backward\tabularnewline
+\hline 
+ &  & $y^{(n+1)}=y^{(n)}+\Delta tF(y^{(n)})$ & $y^{(n+1)}=y^{(n)}+\Delta tF(y^{(n+1)})$\tabularnewline
+\hline 
+\hline 
+Oscillation equation & $F(y)=i\kappa y$ & $\opttext{\text{unstable }\forall\ \Delta t}$ & $\opttext{\text{stable }\forall\ \Delta t}$\tabularnewline
+\hline 
+Exponential decay & $F(y)=-\kappa y$ & $\opttext{\text{stable for }\Delta t\le2/\kappa}$ & $\opttext{\text{stable }\forall\ \Delta t}$\tabularnewline
+\hline 
+\end{tabular}
+
+}
+
+\optpage{
+
+
+\subsubsection{Solutions}
+\begin{enumerate}
+\item Euler forward for the oscillation equation. \\
+$A=1+i\Delta t\kappa\ \implies\ |A|^{2}=1+\kappa^{2}\Delta t^{2}>1\ \forall\Delta t>0,\ \kappa>0$
+\item Euler backward for the oscillation equation. \\
+$A=1+i\Delta t\kappa A\ \implies\ A=1/(1-i\Delta t\kappa)\ \implies\ |A|^{2}=1/(1+\kappa^{2}\Delta t^{2})<1\ \forall\Delta t>0,\ \kappa>0$
+\item Euler forward for the exponential decay. \\
+$A=1-\Delta t\kappa\ \implies\ |A|\le1\iff1-\Delta t\kappa\ge-1\iff\Delta t\kappa\le2$
+\item Euler backward for the exponential decay. \\
+$A=1-\Delta t\kappa A\ \implies\ A=1/(1+\Delta t\kappa)\ \implies\ |A|<1\ \forall\Delta t>0,\ \kappa>0$
+\end{enumerate}
+}
+
+
+\section{Summary of Advantages of Different Types of Time-Stepping Schemes}
+
+
+\subsubsection*{Explicit}
+
+\optparagraph{Cheap to compute}
+
+
+\subsubsection*{Implicit}
+
+\optparagraph{Stable with large time-steps}
+
+
+\subsubsection*{Multi-step}
+
+\optparagraph{Cheap since fewer function evalulations}
+
+
+\subsubsection*{Multi-stage}
+
+\optparagraph{No computational modes}

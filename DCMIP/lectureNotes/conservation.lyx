@@ -1,0 +1,1819 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip smallskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Conservation
+\end_layout
+
+\begin_layout Itemize
+What should be conserved? 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "Material from "
+key "Thu08a,RTSK10"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+How can conservation be achieved?
+\end_layout
+
+\begin_layout Section
+Should Weather and Climate Models Conserve Mass?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+ECMWF and the Met Office are the most skillful weather forecasting models
+ and they do 
+\shape italic
+not
+\shape default
+ conserve mass.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Why not?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+They rely on semi-Lagrangian advection to achieve reasonable time-steps
+ on lat-lon grids
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+However we are moving away from lat-lon grids because they do not work well
+ on massively parallel computers
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Mass is conserved in the real atmosphere over all time-scales, regardless
+ of adiabatic processes and friction (neglecting relativistic effects)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Mass errors 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ pressure errors 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ spurious winds
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Failure to conserve mass means that nothing else can be conserved.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+You do not want to lose all the mass in the atmosphere over a long climate
+ simulation
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\series bold
+So 
+\shape italic
+YES
+\shape default
+ weather and climate models should conserve mass
+\series default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Should Weather and Climate Models Conserve Energy?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Energy is difficult to conserve because it consists of many different types
+ of energy which are calculated separately and transfers between them may
+ not be conservative.
+ It consists of:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Available and un-available potential energy (the unavailable potential energy
+ is the potential energy that the atmosphere would have if it were in stationary
+ hydrostatic balance)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+kinetic energy 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+internal energy (calculated from temperature)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+chemical energy
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Unavailable PE is much larger than all the others and does not undergo a
+ cascade to smaller scales.
+ 
+\begin_inset Formula $\therefore$
+\end_inset
+
+ should be conserved exactly.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Available PE has a time-scale of 
+\begin_inset Formula $\approx$
+\end_inset
+
+20 days in the atmosphere so spurious sources should lead to slower changes
+ than this.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Kinetic energy cascades to small scales and there will always be unresolved
+ kinetic energy.
+ 
+\begin_inset Formula $\therefore$
+\end_inset
+
+ models should dissipate rather than conserve KE (which should lead to a
+ rise in temperature).
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Formal energy conservation helps with model stability.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\series bold
+Avoid large spurious sinks and especially spurious 
+\shape italic
+sources
+\shape default
+ of energy
+\series default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Should Weather and Climate Models Conserve Momentum?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+There is a transfer of momentum with the Earth's surface so momentum is
+ not conserved in the atmosphere.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Momentum is not dissipated -- there is no cascade to small scales.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Momentum is conserved over very long time-scales in the stratosphere.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Most models do not conserve momentum
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+The stratospheric quasi-biennial oscillation is very difficult to simulate.
+ Related?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\series bold
+Don't know.
+ Usually more focus on energy, enstrophy and vorticity in atmospheric modelling.
+\series default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Should Weather and Climate Models Conserve Tracer Variance and Potential
+ Enstrophy?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What is potential enstrophy? ...
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+opttext{
+\end_layout
+
+\end_inset
+
+Variance of the potential vorticity:
+\begin_inset Formula 
+\[
+\text{potential enstrophy}=\frac{1}{2}hq^{2}
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\text{potential vorticity, }q=(\boldsymbol{\eta}+2\boldsymbol{\Omega})\cdot\mathbf{k}/h\ \text{, vorticity, }\boldsymbol{\eta}=\nabla\times\mathbf{u}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Cascade to small scales then dissipation in about 10 days
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Lots of un-resolved tracer variance and enstrophy
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Conservation 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ spectral blocking at the grid-scale 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\therefore$
+\end_inset
+
+ need to make sure that tracer variance and enstrophy are destroyed at the
+ grid scale.
+ How ...
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Scale selective dissipation or
+\end_layout
+
+\begin_layout Itemize
+Dissipative advection scheme, eg
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Odd order finite volume with a limiter
+\end_layout
+
+\begin_layout Itemize
+Even order semi-Lagrangian
+\end_layout
+
+\begin_layout Standard
+So that leading order error is dissipative rather than dispersive
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Should Weather and Climate Models Conserve Potential Vorticity?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+PV conservation 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ correct strength of weather systems
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+PV is derived from velocity so conservation requires careful numerics
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+How can Mass be Conserved?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Air density, 
+\begin_inset Formula $\rho$
+\end_inset
+
+, satisfies the continuity equation:
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial\rho}{\partial t}+\nabla\cdot(\mathbf{u}\rho)=0\label{eq:cont}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ is the wind.
+ This is a conservation equation for 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Let us assume that 
+\begin_inset Formula $\rho$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ vary only in the 
+\begin_inset Formula $x$
+\end_inset
+
+ direction and that our periodic domain goes from 
+\begin_inset Formula $x=0$
+\end_inset
+
+ to 
+\begin_inset Formula $x=2\pi$
+\end_inset
+
+ (for example around the equator).
+ Then the total mass of air is:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+M=\int_{0}^{2\pi}\rho\ dx\label{eq:mass}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+If we solve eqn (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:cont"
+
+\end_inset
+
+) using a finite volume scheme we get:
+\begin_inset Formula 
+\begin{equation}
+\rho_{j}^{(n+1)}=\rho_{j}^{(n)}-\opttext{\Delta t\frac{u_{j+1/2}\rho_{j+1/2}-u_{j-1/2}\rho_{j-1/2}}{\Delta x}}\label{eq:oneDFV}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $u_{j\pm1/2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho_{j\pm1/2}$
+\end_inset
+
+ can be defined in any way from the values of 
+\begin_inset Formula $u_{j}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho_{j}$
+\end_inset
+
+ at the grid points (eg interpolation).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+The total mass in the computational domain at time 
+\begin_inset Formula $n$
+\end_inset
+
+ is:
+\begin_inset Formula 
+\begin{equation}
+M^{(n)}=\opttext{\sum_{j=1}^{j=N}\Delta x\rho_{j}^{(n)}.}\label{eq:compMass}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+To find 
+\begin_inset Formula $M^{(n+1)}$
+\end_inset
+
+ as predicted from the finite volume scheme, we can substitute eqn (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:oneDFV"
+
+\end_inset
+
+) into (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:compMass"
+
+\end_inset
+
+):
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray}
+M^{(n+1)} & = & \sum_{j=1}^{j=N}\Delta x\rho_{j}^{(n+1)}=\step{\sum_{j=1}^{j=N}\left\{ \Delta x\rho_{j}^{(n)}-\Delta t\left(u_{j+1/2}\rho_{j+1/2}-u_{j-1/2}\rho_{j-1/2}\right)\right\} }\\
+ & = & \opttext{M^{(n)}-\Delta t\left(\sum_{j=1}^{j=N}u_{j+1/2}\rho_{j+1/2}-\sum_{j=1}^{j=N}u_{j-1/2}\rho_{j-1/2}\right)}\\
+ & = & \step{M^{(n)}-\Delta t\left(\sum_{j=1}^{j=N}u_{j+1/2}\rho_{j+1/2}-\sum_{j=0}^{j=N-1}u_{j+1/2}\rho_{j+1/2}\right)}\\
+ & = & \opttext{M^{(n)}-\Delta t\left(u_{N+1/2}\rho_{N+1/2}-u_{1/2}\rho_{1/2}\right)}
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+and since we have periodic boundary conditions, 
+\begin_inset Formula $u_{N+1/2}\rho_{N+1/2}=u_{1/2}\rho_{1/2}$
+\end_inset
+
+ proving that 
+\begin_inset Formula $M^{(n+1)}=M^{(n)}$
+\end_inset
+
+ and hence mass is conserved.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+If instead we discretised the advective form of the continuity equation:
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial\rho}{\partial t}+\mathbf{u}\cdot\nabla\rho+\rho\nabla\cdot\mathbf{u}=0\label{eq:contAdv}
+\end{equation}
+
+\end_inset
+
+using finite differences or semi-Lagrangian, conservation would not be so
+ easy to achieve.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+How can Energy be Conserved?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One possible technique would be to solve a conservation equation for total
+ energy and then calculate temperature from the energy.
+ However this is not done in atmospheric models.
+ Why not? ...
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Instead we can consider how energy can be conserved in the vector invariant
+ form of the linearised shallow-water equations, solving for 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+ and 
+\begin_inset Formula $h$
+\end_inset
+
+:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+\frac{\partial\mathbf{u}}{\partial t} & +\boldsymbol{\eta}\times\mathbf{u}=-g\nabla h-\nabla K\label{eqn:linSWEuv}\\
+\frac{\partial h}{\partial t} & +\nabla\cdot(h\mathbf{u})=0\label{eqn:linSWEh}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{\eta}=\nabla\times\mathbf{u}+2\boldsymbol{\Omega}$
+\end_inset
+
+ is the total vorticity and 
+\begin_inset Formula $K={\textstyle \frac{1}{2}|\mathbf{u}|^{2}}$
+\end_inset
+
+ is the kinetic energy.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+The energy is defined as:
+\begin_inset Formula 
+\begin{equation}
+E=\frac{1}{2}gh^{2}+hK.
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+If we calculate 
+\begin_inset Formula $h\mathbf{u}\cdot$
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eqn:linSWEuv"
+
+\end_inset
+
+)
+\begin_inset Formula $+(gh+K)$
+\end_inset
+
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eqn:linSWEh"
+
+\end_inset
+
+) we can derive the conservation equation for 
+\begin_inset Formula $E$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+\opttext{h\mathbf{u}\cdot\frac{\partial\mathbf{u}}{\partial t}+h\mathbf{u}\cdot(\boldsymbol{\eta}\times\mathbf{u})+(gh+K)\frac{\partial h}{\partial t}+(gh+K)\nabla\cdot(h\mathbf{u})=-gh\mathbf{u}\cdot\nabla h-h\mathbf{u}\cdot\nabla K}\label{eq:linSWenergy}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the vector calculus identities:
+\begin_inset Formula 
+\begin{eqnarray*}
+\mathbf{u}\cdot(\boldsymbol{\eta}\times\mathbf{u}) & = & 0\\
+K\nabla\cdot(h\mathbf{u})+h\mathbf{u}\cdot\nabla K & = & \nabla\cdot(Kh\mathbf{u})
+\end{eqnarray*}
+
+\end_inset
+
+eqn (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:linSWenergy"
+
+\end_inset
+
+) can be rearranged to give:
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial E}{\partial t}+\opttext{\nabla\cdot(h^{2}\mathbf{u}+hK\mathbf{u})=0.}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+The term 
+\begin_inset Formula $\nabla\cdot(h^{2}\mathbf{u}+hK\mathbf{u})$
+\end_inset
+
+ is the divergence of a flux so it cannot create or destroy energy, just
+ move energy around.
+ Therefore, for a SWE model to conserve energy, it must have discrete versions
+ of the above vector calculus identities.
+ These are called 
+\shape italic
+mimetic 
+\shape default
+properties.
+ The mimic properties of the real system.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+How can Potential Vorticity be Conserved?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+liststepwise{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The PV equation can be derived by taking the curl of the momentum equation
+ (in vector invariant form):
+\begin_inset Formula 
+\begin{equation}
+\nabla\times\frac{\partial\mathbf{u}}{\partial t}+\nabla\times(\boldsymbol{\eta}\times\mathbf{u})=\opttext{-\cancelto{0}{\nabla\times(g\nabla h+\nabla K)}}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+Considering the 2D flow of the SWE and uing the vector calculus identities:
+\begin_inset Formula 
+\begin{eqnarray*}
+\nabla\times\nabla h & = & 0
+\end{eqnarray*}
+
+\end_inset
+
+this gives:
+\begin_inset Formula 
+\[
+\frac{\partial hq}{\partial t}+\nabla\cdot(qh\mathbf{u})=0
+\]
+
+\end_inset
+
+which is a conservation equation for the PV, 
+\begin_inset Formula $q=(\boldsymbol{\eta}+2\boldsymbol{\Omega})\cdot\mathbf{k}/h$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+step{
+\end_layout
+
+\end_inset
+
+ So for a model to conserve PV, it must have a discrete equivalent of curl
+ free gradients.
+ This is another 
+\shape italic
+mimetic 
+\shape default
+property.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

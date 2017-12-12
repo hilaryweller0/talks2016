@@ -1,0 +1,2241 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\usepackage{animate}
+
+% hack to get natbib working with beamer
+\renewcommand{\newblock}{}
+
+% list modifications
+\setlength{\leftmargini}{1em}
+\setlength{\leftmarginii}{1em}
+
+% make $\times$, $+$, $-$ and $=$ use less space
+\newcommand{\tims}{\negthinspace \times \negthinspace}
+\newcommand{\eq}{\negthinspace = \negthinspace}
+\newcommand{\plus}{\negthinspace + \negthinspace}
+\newcommand{\minus}{\text{-}}
+\newcommand{\smallcdot}{\negthinspace \cdot \negthinspace}
+
+\newcommand{\nicefrac}[2]{\ensuremath ^{#1}\!\!/\!_{#2}}
+\usepackage { fancybox}
+
+%% % redefine normalize with different display skips
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\abovedisplayskip{3\p@ \@plus2\p@ \@minus2\p@}
+  \setlength\belowdisplayskip{2\p@ \@plus2\p@ \@minus2\p@}
+  \setlength\abovedisplayshortskip{\z@ \@plus1\p@\@minus6\p@}
+  \setlength\belowdisplayshortskip{\z@ \@plus1\p@\@minus6\p@}
+}
+\makeatother
+\end_preamble
+\options serif,round,handout
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref section
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Computational Challenges in Numerical Weather Prediction
+\end_layout
+
+\begin_layout Author
+Hilary Weller
+\end_layout
+
+\begin_layout Institute
+Meteorology, University of Reading
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+What makes an Accurate and Efficient Weather Forecasting Model?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "73col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+raisebox{-0.9
+\backslash
+height}{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/hilary/latex/meetings/2014/SIAMstudent/figs/forecastSkill_Wood.png
+	lyxscale 50
+	width 100line%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+courtesy of Nigel Wood, UK Met Office
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "25col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+semi-implicit
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+parbox{1cm}{
+\backslash
+mbox{semi-Lagrangian}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+lat-lon grid
+\end_layout
+
+\begin_layout Itemize
+Spectral 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Big computer
+\end_layout
+
+\begin_layout Itemize
+Well optimised
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Latitude-Longitue Grids - Why?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "48col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+raisebox{-0.9
+\backslash
+height}{
+\backslash
+includegraphics[width=
+\backslash
+linewidth] {../../2011/pLinks/graphics/meshes+latLon+constant+mesh.pdf}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "48col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+Simple data structures
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+3D arrays
+\end_layout
+
+\begin_layout Itemize
+simple addressing
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Cache coherency 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The simplest numerics are accurate.
+ Eg:
+\begin_inset Formula 
+\[
+\frac{\partial p}{\partial x}_{i}=\frac{p_{i+1}-p_{i-1}}{2\Delta x}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Can use a staggered grid (storage of velocity and pressure offset)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Mature models (1,000,000 lines of code) eg Met Office and ECMWF
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Eulerian or Semi-Lagrangian Advection
+\end_layout
+
+\begin_layout Itemize
+The 1D linear advection equation (for transporting atmospheric constituents,
+ 
+\begin_inset Formula $\phi$
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+\frac{\partial\phi}{\partial t}=-u\frac{\partial\phi}{\partial x}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The simplest 
+\series bold
+Eulerian
+\series default
+ numerics:
+\begin_inset Formula 
+\[
+\frac{\phi_{i}^{n+1}-\phi_{i}^{n}}{\Delta t}=-u\frac{\phi_{i}^{n}-\phi_{i-1}^{n}}{\Delta x}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\phi_{i}^{n}$
+\end_inset
+
+ is the value of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ at grid position 
+\begin_inset Formula $i$
+\end_inset
+
+ and at time level 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Re-arrange to find 
+\begin_inset Formula $\phi_{i}^{n+1}$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ at time level 
+\begin_inset Formula $n$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\phi_{i}^{n+1}=\left(1-\frac{u\Delta t}{\Delta x}\right)\phi_{i}^{n}+\frac{u\Delta t}{\Delta x}\phi_{i-1}^{n}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $1-\frac{u\Delta t}{\Delta x}<0$
+\end_inset
+
+ the solution will oscillate from one time-step to the next.
+ The oscillations will grow and the model will crash
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Formula $\therefore$
+\end_inset
+
+ we require
+\begin_inset Formula 
+\[
+\Delta t<\frac{\Delta x}{u}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Towards the poles of the latitude-longitude grid we can have 
+\begin_inset Formula $\Delta x\sim100\ \text{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $u\sim100\ \text{m/s}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\implies$
+\end_inset
+
+ we need 
+\begin_inset Formula $\Delta t<1\ \text{second}$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+This is too small to achieve a 5 day forecast in one hour.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\therefore$
+\end_inset
+
+ semi-Lagrangian
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Semi-Lagrangian
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "50text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+raisebox{-0.9
+\backslash
+height}{
+\backslash
+hspace{-1cm}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+includegraphics[width=1.2
+\backslash
+linewidth] {../../2011/pLinks/graphics/meshes+latLon+constant+mesh.pdf}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{picture}(0,0)
+\backslash
+put(-108,58) {
+\backslash
+includegraphics[scale=0.42]{../../2011/gungHoNCASJul2011/figs/arrow.pdf}} 
+\backslash
+end{picture}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+Use analytic solution of the advection equation
+\end_layout
+
+\begin_layout Itemize
+Solution at time-level 
+\begin_inset Formula $n+1$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+= solution at time-level 
+\begin_inset Formula $n$
+\end_inset
+
+ at the departure point 
+\begin_inset Formula 
+\[
+\phi_{i}^{n+1}=\phi_{d}^{n}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\therefore$
+\end_inset
+
+ need to interpolate from grid points at time-level 
+\begin_inset Formula $n$
+\end_inset
+
+ to departure point, 
+\begin_inset Formula $d$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+enables long, accurate time-steps
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+non-sequential memory access
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Semi-implicit time-stepping
+\end_layout
+
+\begin_layout Itemize
+Acoustic and gravity waves are treated implicitly 
+\end_layout
+
+\begin_layout Itemize
+Advection treated explicitly (eg using semi-Lagrangian)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+What is explicit treatment of acoustic waves?
+\end_layout
+
+\begin_layout Itemize
+Equation for an acoustic wave in 1D
+\begin_inset Formula 
+\[
+\frac{\partial p^{2}}{\partial t^{2}}=c^{2}\frac{\partial p^{2}}{\partial x^{2}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $p$
+\end_inset
+
+ is pressure and 
+\begin_inset Formula $c$
+\end_inset
+
+ is the speed of sound.
+ Explicit solution:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{p_{i}^{n+1}-2p_{i}^{n}+p_{i}^{n-1}}{\Delta t^{2}}=c^{2}\frac{p_{i+1}^{n}-2p_{i}^{n}+p_{i-1}^{n}}{\Delta x^{2}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $p_{i}^{n}$
+\end_inset
+
+ is pressure at grip point 
+\begin_inset Formula $i$
+\end_inset
+
+, time-level 
+\begin_inset Formula $n$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Re-arrange to find 
+\begin_inset Formula $p_{i}^{n+1}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+p_{i}^{n+1}=2p_{i}^{n}\left(1-\frac{c^{2}\Delta t^{2}}{\Delta x^{2}}\right)-p_{i}^{n-1}+\frac{c^{2}\Delta t^{2}}{\Delta x^{2}}\left(p_{i+1}^{n}+p_{i-1}^{n}\right)
+\]
+
+\end_inset
+
+Very simple and cheap to calculate 
+\begin_inset Formula $p_{i}^{n+1}$
+\end_inset
+
+ but ...
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Semi-implicit time-stepping
+\end_layout
+
+\begin_layout Itemize
+Re-arrange to find 
+\begin_inset Formula $p_{i}^{n+1}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+p_{i}^{n+1}=2p_{i}^{n}\left(1-\frac{c^{2}\Delta t^{2}}{\Delta x^{2}}\right)-p_{i}^{n+1}+\frac{c^{2}\Delta t^{2}}{\Delta x^{2}}\left(p_{i+1}^{n}+p_{i-1}^{n}\right)
+\]
+
+\end_inset
+
+Very simple and cheap to calculate 
+\begin_inset Formula $p_{i}^{n+1}$
+\end_inset
+
+ but ...
+ if 
+\begin_inset Formula $1-\frac{c^{2}\Delta t^{2}}{\Delta x^{2}}<1$
+\end_inset
+
+ then the solution will oscillate from one time-step to another, leading
+ to the model crashing.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\therefore$
+\end_inset
+
+ we need 
+\begin_inset Formula $\Delta t\le\Delta x/c$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $c=340\ \text{m/s}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta x=10\ \text{km}$
+\end_inset
+
+ (or 
+\begin_inset Formula $\Delta z=10\ \text{m}$
+\end_inset
+
+ in the vertical) then we require
+\begin_inset Formula 
+\[
+\Delta t\le30\ \text{seconds}\ \text{ (or }\Delta t\le0.03\ \text{seconds)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+This is too small to achieve a 5 day forecast in one hour.
+ 
+\begin_inset Formula $\therefore$
+\end_inset
+
+ ...
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Implicit treatment of acoustic waves
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{p_{i}^{n+1}-2p_{i}^{n}+p_{i}^{n-1}}{\Delta t^{2}}=c^{2}\frac{p_{i+1}^{n+1}-2p_{i}^{n+1}+p_{i-1}^{n+1}}{\Delta x^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Rearrange to find values at time level 
+\begin_inset Formula $n+1$
+\end_inset
+
+ in terms of time-level 
+\begin_inset Formula $n$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\frac{c^{2}\Delta t^{2}}{\Delta x^{2}}p_{i+1}^{n+1}-p_{i}^{n+1}\left(1+2\frac{c^{2}\Delta t^{2}}{\Delta x^{2}}\right)+\frac{c^{2}\Delta t^{2}}{\Delta x^{2}}p_{i-1}^{n+1}=2p_{i}^{n}-p_{i-1}^{n-1}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+To find a numerical solution for 
+\begin_inset Formula $p_{i}^{n+1}$
+\end_inset
+
+ requires the solution of a sparse, symmetric, diagonally dominant 
+\begin_inset Formula $N\times N$
+\end_inset
+
+ matrix at every time-step.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+No time-step restrictions 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ fast forecast
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Pseudo-Spectral Method
+\end_layout
+
+\begin_layout Itemize
+The most accurate numerical method for the computational cost
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Used by ECMWF
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Uses Fourier or Legendre transforms
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Moore's Law
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename figs/MooresLaw.png
+	width 100text%
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+
+\end_layout
+
+\begin_layout Itemize
+For More Accurate Weather Forecasts we need higher resolution
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\implies$
+\end_inset
+
+ larger parallel computers
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+But parallel scaling is running out
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/latex/teaching/MTMW14/2014/notes/figs/metoScaling.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+courtesy of Nigel Wood, UK Met Office
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Parallel scaling bottlenecks
+\end_layout
+
+\begin_layout Standard
+The Met Office have identified:
+\end_layout
+
+\begin_layout Itemize
+Lat-lon grid
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Semi-implicit
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Semi-Lagrangian
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ECMWF have identified:
+\end_layout
+
+\begin_layout Itemize
+Spectral Method
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Alternatives to the lat-lon grid - Cubed-Sphere
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "68col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+raisebox{-0.9
+\backslash
+height}{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary2-dev/run/shallowWater/WilliSteady/cube24_eq/constant/mesh_30.pdf
+	lyxscale 50
+	width 100text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "28col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+Requires finite element method for accuracy 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Planned for next Met Office model (Gung-Ho)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Used by Community Atmosphere Model (CAM) of NCAR
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Used by GFDL finite volume model
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Alternatives to the lat-lon grid - Icosahedron
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "68col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+raisebox{-0.9
+\backslash
+height}{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary2-dev/run/shallowWater/WilliSteady/bucky4/constant/mesh_30.pdf
+	lyxscale 50
+	width 100text%
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "28col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+Hexagonal version requires finite volume method for simplicity
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Used by MPAS - model for prediction across scales 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Used by NICAM - Japanese model run at 500m global resolution
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Alternative to Semi-implicit
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+HEVI
+\series default
+ - horizontally explicit, vertically implicit 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Horizontal Courant number
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $=c\frac{\Delta t}{\Delta x}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Vertical Courant number
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $=c\frac{\Delta t}{\Delta z}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+where 
+\begin_inset Formula $c$
+\end_inset
+
+ is the advection or wave speed 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Using typical values 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta x=$
+\end_inset
+
+ 15km, 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta z=$
+\end_inset
+
+ 200m, 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta t=$
+\end_inset
+
+ 3 mins 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Maximum 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Courant numbers
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $c$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Horizontal 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Vertical 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+horizontal wind: 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $u$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80m/s 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-- 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+vertical wind: 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $w$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5m/s 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+speed of sound: 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $c_{s}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+340m/s 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+300 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+So we only really need semi-implicit solution for vertically propagating
+ sound waves
+\end_layout
+
+\begin_layout Itemize
+Need to deal with large vertical advection Courant numbers
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ HEVI: Horizontally Explicit, Vertically Implicit 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Solution of one 
+\begin_inset Formula $N_{z}\times N_{z}$
+\end_inset
+
+ tri-diagonal matrix per model column where 
+\begin_inset Formula $N_{z}=$
+\end_inset
+
+ number of points in the vertical
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Alternative to Semi-Lagrangian
+\end_layout
+
+\begin_layout Itemize
+Semi-Lagrangian not so important without lat-lon grid 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Need flux-form semi-Lagrangian in the vertical
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+non-sequential memory access only within each model column
+\end_layout
+
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Other Possibilities for more Parallelism
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Mathematical
+\end_layout
+
+\begin_layout Itemize
+Semi-implicit with better multi-grid solvers (lots of references) 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Parallel in time 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HW14"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Computational Science
+\series default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Need to re-write 
+\begin_inset Formula $\sim1,000,000$
+\end_inset
+
+ lines of code
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Multi-threading and OpenMP as well as MPI
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+so far not beneficial but Met Office are optimistic
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Automatic code generation
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+python writes fortran
+\end_layout
+
+\begin_layout Itemize
+separation of concerns 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\noindent
+\align center
+End
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "numerics"
+options "plainnat"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\end_body
+\end_document

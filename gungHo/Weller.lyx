@@ -1,0 +1,1838 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\usepackage{animate}
+
+% hack to get natbib working with beamer
+\renewcommand{\newblock}{}
+
+% list modifications
+\setlength{\leftmargini}{1em}
+\setlength{\leftmarginii}{1em}
+
+% make $\times$, $+$, $-$ and $=$ use less space
+\newcommand{\tims}{\negthinspace \times \negthinspace}
+\newcommand{\eq}{\negthinspace = \negthinspace}
+\newcommand{\plus}{\negthinspace + \negthinspace}
+\newcommand{\minus}{\text{-}}
+\newcommand{\smallcdot}{\negthinspace \cdot \negthinspace}
+
+\newcommand{\nicefrac}[2]{\ensuremath ^{#1}\!\!/\!_{#2}}
+\usepackage { fancybox}
+\end_preamble
+\options serif,round,handout
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref section
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+DCMIP, Moving Meshes and Transport 
+\end_layout
+
+\begin_layout Author
+Hilary Weller
+\end_layout
+
+\begin_layout Institute
+With thanks but not blame to James Shaw, Yumeng Chen, Stephen Pring, Nigel
+ Wood, Phil Browne, Chris Budd, Mike Cullen
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+DCMIP 2020
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+DCMIP
+\end_layout
+
+\begin_layout Itemize
+Popular workshop series, testing dynamical cores with students 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Difficult to fund 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Lots of administration for Paul Ullrich and Christiane Jablonowski 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Test cases are not always the ones that the modelling participants want
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+DCMIP 2020
+\end_layout
+
+\begin_layout Itemize
+A Newton Institute Workshop?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Current DCMIP organisers keen
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Still use Yellowstone supercomputer
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+New organisers will help to set test cases
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Newton Insitute interested
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Call for co-organisers
+\end_layout
+
+\begin_layout Standard
+Need to write a proposal for a workshop
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Moving Meshes -- why
+\end_layout
+
+\begin_layout Standard
+Motivation - Adaptive resolution with some advantages over h-adaptivity:
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Fixed mesh size and connectivity
+\end_layout
+
+\begin_layout Itemize
+No load balancing problems
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Smoothly varying resolution (smooth in space and time)
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+No need to map solution between old and new meshes
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+no cost of re-mapping
+\end_layout
+
+\begin_layout Itemize
+no shocks due to imbalance on re-mapping
+\end_layout
+
+\begin_layout Itemize
+solve equations on moving meshes instead.
+ Eg continuity eqn:
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\partial\rho}{\partial t}+\nabla\cdot\left(\rho\ (\mathbf{u}-\mathbf{u}_{\text{mesh}})\right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Moving Meshes -- how
+\end_layout
+
+\begin_layout Standard
+Given a monitor function, 
+\begin_inset Formula $m(\mathbf{x},t)$
+\end_inset
+
+, (based on local error measures?) a mesh can be found with local resolution
+ proportional to 
+\begin_inset Formula $1/m(\mathbf{x},t)$
+\end_inset
+
+ by solving the Monge-Ampere equation for 
+\begin_inset Formula $\phi$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+|I+\nabla\nabla\phi|m(\mathbf{x},t)=1.
+\]
+
+\end_inset
+
+Then the new mesh points, 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+, are then defined from the old mesh points, 
+\begin_inset Formula $\bm{\xi}$
+\end_inset
+
+, by
+\begin_inset Formula 
+\[
+\mathbf{x}=\bm{\xi}+\nabla\phi.
+\]
+
+\end_inset
+
+This leads to an 
+\series bold
+\color blue
+equi-distribued, optimally transported mesh
+\series default
+\color inherit
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However the equation on the sphere is completely different...!
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Re-analysis Precipitation as a Monitor Function
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -10pt
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+\begin_inset Formula 
+\[
+m=\frac{p+p_{\min}}{p_{\max}+p_{min}}\ \text{where}\ p_{\min}=10^{-5}\text{kg}\text{m}^{-2}\text{s}^{-1},\ p_{\max}=8.73\times10^{-4}\text{kg}\text{m}^{-2}\text{s}^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+animategraphics[width=
+\backslash
+linewidth,controls,loop,autoplay]{10}{/home/hilary/OpenFOAM/hilary-2.3.0/run/meshe
+s/sphereMeshes/MongeAmpereFromPpt/6/movie/pptMesh}{1}{11}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\lang british
+Using daily average precipitation rate, 1-12 Oct 2012, from the NOAA-CIRES
+ 20th Century Reanalysis version 2 (Compo et al, 2011, 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.esrl.noaa.gov/psd/data/gridded/data.20thC_ReanV2.html
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Transport -- work with Stephen Pring, James Shaw and Yumeng Chen
+\end_layout
+
+\begin_layout Itemize
+Dimensionally split or multi-dimensional
+\end_layout
+
+\begin_layout Itemize
+Flux form semi-Lagrangian or method of lines
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Dimensionally Split Scheme
+\end_layout
+
+\begin_layout Itemize
+PPM (Piecewise Parabolic Method) in each direction separately
+\end_layout
+
+\begin_layout Itemize
+Directions coupled using COSMIC splitting
+\end_layout
+
+\begin_layout Itemize
+Flux-form semi-Lagrangian (integrate along departure trajectories)
+\end_layout
+
+\begin_layout Itemize
+Monotonicity constraints switched off
+\end_layout
+
+\begin_layout BeginFrame
+Multi-dimensional Scheme
+\end_layout
+
+\begin_layout Itemize
+Method of lines with Runge-Kutta time-stepping:
+\begin_inset Formula 
+\begin{eqnarray*}
+\rho^{\prime} & = & \rho^{n}-\Delta t\nabla\cdot\left(\rho^{n}\mathbf{u}\right)\\
+\rho^{n+1} & = & \rho^{n}-\Delta t/2\left(\nabla\cdot\left(\rho^{n}\mathbf{u}\right)+\nabla\cdot\left(\rho^{\prime}\mathbf{u}\right)\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Finite volume evaluation of 
+\begin_inset Formula $\nabla\cdot\left(\rho\mathbf{u}\right)$
+\end_inset
+
+ at any instant:
+\begin_inset Formula 
+\[
+\nabla\cdot\left(\rho\mathbf{u}\right)=\frac{1}{V}\sum_{\text{faces}}\rho_{f}\mathbf{u}\cdot d\mathbf{S}_{f}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Density on faces, 
+\begin_inset Formula $\rho_{f}$
+\end_inset
+
+, is calculated from 
+\begin_inset Formula $\rho$
+\end_inset
+
+ at cell centres using a polynomial fit over a stencil:
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+27 cells in 3D, 12 in 2D:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset External
+	template XFig
+	filename figs/cubicUpCPCstencil.fig
+	width 90line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49text%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+Fit the polynomial (cubic in 
+\begin_inset Formula $x$
+\end_inset
+
+, quadratic in 
+\begin_inset Formula $y$
+\end_inset
+
+, quadratic in 
+\begin_inset Formula $z$
+\end_inset
+
+, 16 terms in 3D, 
+\begin_inset Formula $y^{2}z$
+\end_inset
+
+ and 
+\begin_inset Formula $yz^{2}$
+\end_inset
+
+ missing) with terms:
+\begin_inset Formula 
+\begin{eqnarray*}
+a+bx+cx^{2}+dx^{3}+\\
+ey+fxy+gx^{2}y
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+Least squares fit using singular value decomposition
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+once per mesh
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+This is much cheaper than multi-dimensional flux-form semi-Lagrangian (forward
+ in time)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+For a stencil of 12 cells, 12 multiplies per RK stage
+\end_layout
+
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Deformational Flow on a Plane
+\end_layout
+
+\begin_layout Standard
+Using a non-orthogonal grid:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/deformingAdvectionCyclic_nonOrthogW_c1_120x60_0_TUmesh.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/deformingAdvectionCyclic_legends_Tmesh_T.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Results using 
+\begin_inset Formula $480\times240$
+\end_inset
+
+ cells, 
+\begin_inset Formula $t=1$
+\end_inset
+
+ time unit
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PPM with COSMIC splitting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Multi-dimensional
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/YumengsGraphics/deformationalData/plots/T1.png
+	lyxscale 25
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/deformingAdvectionCyclic_nonOrthogW_c1_480x240_1_T.png
+	lyxscale 25
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Results using 
+\begin_inset Formula $480\times240$
+\end_inset
+
+ cells, 
+\begin_inset Formula $t=2$
+\end_inset
+
+ time unit
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PPM with COSMIC splitting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Multi-dimensional
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/YumengsGraphics/deformationalData/plots/T2.png
+	lyxscale 25
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/deformingAdvectionCyclic_nonOrthogW_c1_480x240_2_T.png
+	lyxscale 25
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Results using 
+\begin_inset Formula $480\times240$
+\end_inset
+
+ cells, 
+\begin_inset Formula $t=3$
+\end_inset
+
+ time unit
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PPM with COSMIC splitting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Multi-dimensional
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/YumengsGraphics/deformationalData/plots/T3.png
+	lyxscale 25
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/deformingAdvectionCyclic_nonOrthogW_c1_480x240_3_T.png
+	lyxscale 25
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Results using 
+\begin_inset Formula $480\times240$
+\end_inset
+
+ cells, 
+\begin_inset Formula $t=4$
+\end_inset
+
+ time unit
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PPM with COSMIC splitting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Multi-dimensional
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/YumengsGraphics/deformationalData/plots/T4.png
+	lyxscale 25
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/deformingAdvectionCyclic_nonOrthogW_c1_480x240_4_T.png
+	lyxscale 25
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Results using 
+\begin_inset Formula $480\times240$
+\end_inset
+
+ cells, 
+\begin_inset Formula $t=5$
+\end_inset
+
+ time unit
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PPM with COSMIC splitting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Multi-dimensional
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/YumengsGraphics/deformationalData/plots/T5.png
+	lyxscale 25
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/deformingAdvectionCyclic_nonOrthogW_c1_480x240_5_T.png
+	lyxscale 25
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Convergence with Resolution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+ error
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Formula $\ell_{\infty}$
+\end_inset
+
+ error
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/deformingAdvectionCyclic_plots_l2errors_c1.pdf
+	width 48line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/deformingAdvectionCyclic_plots_linferrors_c1.pdf
+	width 48line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Horizontal Advection over Orography
+\end_layout
+
+\begin_layout Standard
+Errors coloured
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features tabularvalignment="middle" tabularwidth="100line%">
+<column alignment="center" valignment="top" width="42text%">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+Dimensionally split
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+Multi-dimensional
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/YumengsGraphics/vSlice_horizontalAdvection_orography_save_cubicUpwindCPCFit_dt25CN_up_10000_Tall.pdf
+	lyxscale 50
+	width 39text%
+	height 20text%
+	BoundingBox 0bp 0bp 998bp 442bp
+	clip
+	special valign=m
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/vSlice_horizontalAdvection_orography_save_cubicUpwindCPCFit_dt25CN_up_10000_Tall.pdf
+	lyxscale 50
+	width 42text%
+	special valign=m
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/vSlice_horizontalAdvection_orography_legends_Tall_TdiffAll.pdf
+	lyxscale 50
+	width 85text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Convergence with Resolution
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+
+\lang british
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+ error
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Formula $\ell_{\infty}$
+\end_inset
+
+ error
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/orography_l2errors.eps
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/YumengHilaryAdvectionPaper/HilarysGraphics/orography_linferrors.eps
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Transport Over Orography by James Shaw
+\end_layout
+
+\begin_layout Standard
+A new test case to challenge transport over orography 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "SW16"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/latex/meetings/2016/DCMIP/curlFreeGrad/James/thermalAdvection-initial.png
+	lyxscale 10
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Transport Over Orography by James Shaw
+\end_layout
+
+\begin_layout Standard
+A new test case to challenge transport over orography 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "SW16"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/latex/meetings/2016/DCMIP/curlFreeGrad/James/thermalAdvection-steadyState.png
+	lyxscale 10
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Transport Over Orography by James Shaw
+\end_layout
+
+\begin_layout Standard
+Errors when flow aligned with terrain following grid
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/latex/meetings/2016/DCMIP/curlFreeGrad/James/thermalAdvection-btf.png
+	lyxscale 10
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Transport Over Orography by James Shaw
+\end_layout
+
+\begin_layout Standard
+Errors on a new simple cut-cell grid (slanted cells)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/latex/meetings/2016/DCMIP/curlFreeGrad/James/thermalAdvection-slantedCell.png
+	lyxscale 10
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Transport Over Orography by James Shaw
+\end_layout
+
+\begin_layout Standard
+Convergence with Resolution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename James/convergence-thermalAdvection.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Transport Over Orography by James Shaw
+\end_layout
+
+\begin_layout Standard
+Convergence with Resolution of Horizontal Advection
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename James/convergence-horizontalAdvection.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Motivation for Cut Cells
+\end_layout
+
+\begin_layout Standard
+Stably stratified atmosphere using terrain following mesh
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename James/resting-btf.png
+	lyxscale 10
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Motivation for Cut Cells
+\end_layout
+
+\begin_layout Standard
+Stably stratified atmosphere using slanted cells over orography
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename James/resting-slantedCell.png
+	lyxscale 10
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Conclusions
+\end_layout
+
+\begin_layout Itemize
+Need co-organiser to submit proposal for DCMIP 2020 to Newton Institute
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Moving meshes could be a more practical form of adaptivity 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Dimensionally split advection scheme has small first-order errors on non-orthogo
+nal grids such as:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+deformational flow on planar grid similar to cubed sphere
+\end_layout
+
+\begin_layout Itemize
+horizontal advection on terrain following grid
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Mutli-dimensional, method of lines advection:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+cheap for a multi-dimensional scheme
+\end_layout
+
+\begin_layout Itemize
+less accurate on orthogonal grids
+\end_layout
+
+\begin_layout Itemize
+retains accuracy on non-orthogonal grids
+\end_layout
+
+\begin_layout Itemize
+accurate on cut-cell grids
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "numerics"
+options "abbrvnat"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\end_body
+\end_document

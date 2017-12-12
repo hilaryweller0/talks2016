@@ -1,0 +1,1508 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\usepackage{animate}
+
+% hack to get natbib working with beamer
+\renewcommand{\newblock}{}
+
+% list modifications
+\setlength{\leftmargini}{0em}
+\setlength{\leftmarginii}{1em}
+
+% make $\times$, $+$, $-$ and $=$ use less space
+\newcommand{\tims}{\negthinspace \times \negthinspace}
+\newcommand{\eq}{\negthinspace = \negthinspace}
+\newcommand{\plus}{\negthinspace + \negthinspace}
+\newcommand{\minus}{\text{-}}
+\newcommand{\smallcdot}{\negthinspace \cdot \negthinspace}
+
+\newcommand{\nicefrac}[2]{\ensuremath ^{#1}\!\!/\!_{#2}}
+\usepackage { fancybox}
+
+\usepackage{bibentry}
+\end_preamble
+\options serif
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman times
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref section
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Curl-free pressure gradients
+\begin_inset VSpace -0.5cm*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="30line%">
+<column alignment="center" valignment="top" width="30text%">
+<column alignment="center" valignment="middle" width="20line%">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hilary Weller,
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/graphics/MetLogo.png
+	lyxscale 20
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+June 2016
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+James Shaw and 
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ava Shahrokhi
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace -1cm*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Date
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+animategraphics[width=
+\backslash
+linewidth,autoplay,loop]{3}{/home/hilary/OpenFOAM/hilary-2.3.0/run/meshes/sphereMe
+shes/MongeAmpereFromPpt/6/movie/pptMesh}{1}{11}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Based on work published in
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand nocite
+key "WS14"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand nocite
+key "SW16"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand nocite
+key "WBBC16"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "numerics"
+options "abbrvnat"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Why Curl-Free Pressure Gradients
+\end_layout
+
+\begin_layout Itemize
+Take the curl of the vector invariant momentum equation to get the vorticity
+ equation:
+\begin_inset Formula 
+\[
+\frac{\partial\nabla\times\mathbf{u}}{\partial t}+\nabla\times\left(\mathbf{u}\cdot\nabla\mathbf{u}\right)+\nabla\times\left(2\Omega\times\mathbf{u}\right)=\nabla\times\mathbf{g}-\nabla\times\frac{1}{\rho}\nabla p
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+So if pressure surface are aligned with density sources, pressure gradients
+ are not a source of vorticity.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+A discrete mimic of this phenomenon is a property of C-grid models that
+ solve the vector invariant form of the momentum equation.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Normal component of pressure gradient calculated at velocity points using
+ simple finite difference 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Vorcitity at vertexes, calculated from Stoke's circulation theorem from
+ normal velocity 
+\end_layout
+
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Curl-Free Pressure Gradients on the Cubed-Sphere
+\end_layout
+
+\begin_layout Standard
+This also works on non-orthogonal grids such as the cubed-sphere
+\end_layout
+
+\begin_layout Itemize
+Use co-variant rather than contra-variant components of velocity
+\end_layout
+
+\begin_layout Itemize
+Calculate pressure gradient in the same direction
+\end_layout
+
+\begin_layout Itemize
+Hodge operator, 
+\begin_inset Formula $H$
+\end_inset
+
+, to transform from co-variant to contravariant velocities (Contra-variant
+ velocities needed to solve the continuity equation conservatively)
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Curl-Free Pressure Gradients over Orography
+\end_layout
+
+\begin_layout Standard
+But when we use terrain-following coordinates, this property is usually
+ lost
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "50col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template XFig
+	filename figs/orog.fig
+	scale 75
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "47col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+Momentum equation becomes:
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial\mathbf{u}}{\partial t}+\cdots & = & -\frac{1}{\rho}\nabla p\\
+ & = & -\frac{1}{\rho}J\nabla p
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $J$
+\end_inset
+
+ is the Jacobian of the transform 
+\begin_inset Formula $(x,z)\rightarrow(\xi,\zeta)$
+\end_inset
+
+.
+ Numerically it is easy to achieve 
+\begin_inset Formula $\nabla\times\nabla p=0$
+\end_inset
+
+ but not
+\begin_inset Formula 
+\[
+\nabla\times\left(J\nabla p\right)=0
+\]
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Vorticity Generation Using Terrain-Following Coordiantes
+\end_layout
+
+\begin_layout Standard
+Potential vorticity over Alps in two models from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HZ04"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="49line%">
+<column alignment="center" valignment="top" width="49line%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nabla\times\nabla p\ne0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nabla\times\nabla p$
+\end_inset
+
+ much smaller
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figs/HZ04_fig2.png
+	lyxscale 50
+	width 99line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Numerical curl in the pressure gradient where the mesh is non-orthogonal
+ over orography leads to spurious vorticity generation near the tropopause
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Numerical Solution of the Euler Equations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial\rho\mathbf{u}}{\partial t}+\nabla\cdot\rho\mathbf{u}\mathbf{u} & = & \rho\mathbf{g}-c_{p}\rho\theta\nabla\Pi\\
+\frac{\partial\rho}{\partial t}+\nabla\cdot\rho\mathbf{u} & = & 0\\
+\frac{\partial\rho\theta}{\partial t}+\nabla\cdot\rho\mathbf{u}\theta & = & 0\\
+\Pi^{\frac{1-\kappa}{\kappa}} & = & R\rho\theta/p_{0}
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\Pi=(p/p_{0})^{\kappa}$
+\end_inset
+
+, 
+\begin_inset Formula $\theta=T(p_{0}/p)^{\kappa}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Finite-volume C-grid
+\end_layout
+
+\begin_layout Itemize
+Numerical solution for 
+\begin_inset Formula $\rho\bm{u}$
+\end_inset
+
+, 
+\begin_inset Formula $\rho$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho\theta$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+Implicit treatment of gravity and acoustic waves
+\end_layout
+
+\begin_layout Itemize
+No reference profile
+\end_layout
+
+\begin_layout Itemize
+Lorenz staggering
+\end_layout
+
+\begin_layout Itemize
+Multi-dimensional cubic-upwind fit advection
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Warm Bubble Rising Over Orography 
+\series medium
+\size normal
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "GGLR13"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Final maximum Courant number, 0.9 (
+\begin_inset Formula $\Delta t=5s$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+Terrain following
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+Realistic solution
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+animategraphics[width=0.49
+\backslash
+linewidth,controls,poster=first]{5}{../../../2014/WCCM/talk/graphics/bubbleRising_hill
+_save_dt5_cubicUpCPCFit_dpdx_CN_animations_meshTheta_}{0}{5}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+includegraphics[width=0.49
+\backslash
+linewidth]{../../../2014/WCCM/talk/graphics/bubbleRising_hill_save_dt5_cubicUpCPCFit_H
+_CN_animations_meshTheta_5.pdf}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Solution: use covariant components of velocity 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "WS14"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "50col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template XFig
+	filename /home/hilary/latex/meetings/2014/LTsemMar/figs/nonOrthog.fig
+	scale 75
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "48col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align left
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+raggedright
+\end_layout
+
+\end_inset
+
+
+\series bold
+Prognostic variables
+\series default
+: 
+\begin_inset Formula $u_{d}=\mathbf{u}\cdot\hat{\mathbf{d}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align left
+where 
+\begin_inset Formula $\mathbf{d}_{e}=\mathbf{x}_{i}-\mathbf{x}_{j}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align left
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ curl free pressure gradients
+\end_layout
+
+\begin_layout Plain Layout
+\align left
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ no spurious generation of vorticity
+\end_layout
+
+\begin_layout Plain Layout
+THIS IS HOW IT IS DONE IN THE HORIZONTAL.
+ DO THE SAME THING IN THE VERTICAL!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Solution: use covariant components of velocity 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "WS14"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template XFig
+	filename /home/hilary/latex/meetings/2014/LTsemMar/figs/UV.fig
+	scale 75
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "58col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+\noindent
+Still need 
+\begin_inset Formula $u_{n}=\mathbf{u}\cdot\hat{\mathbf{n}}$
+\end_inset
+
+ in continuity equation
+\end_layout
+
+\begin_layout Itemize
+Hodge operator: 
+\begin_inset Formula $u_{n}=Hu_{d}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+For energy conservation, 
+\begin_inset Formula $H$
+\end_inset
+
+ must be symmetric and positive definite 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "as in the horizontal, see"
+key "TCD14"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+First reconstruct full velocity at cells, 
+\begin_inset Formula $c$
+\end_inset
+
+ from 
+\begin_inset Formula $u_{d^{\prime}}$
+\end_inset
+
+ at the surrounding faces, 
+\begin_inset Formula $f^{\prime}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathbf{u}_{c}=T_{i}^{-1}\sum_{f^{\prime}}\mathbf{d}_{f^{\prime}}A_{f^{\prime}}u_{d^{\prime}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\text{ where }\ T=\sum_{f^{\prime}}\hat{\mathbf{d}}_{f^{\prime}}\hat{\mathbf{d}}_{f^{\prime}}^{T}A_{f^{\prime}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Plain Layout
+(Least squares fit)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Then for face 
+\begin_inset Formula $f$
+\end_inset
+
+ between cells 
+\begin_inset Formula $c$
+\end_inset
+
+ and 
+\begin_inset Formula $c^{\prime}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+u_{n}=\frac{1}{2}\left(\mathbf{u}_{c}+\mathbf{u}_{c^{\prime}}\right)\cdot\hat{\mathbf{n}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Warm Bubble Rising Over Orography
+\end_layout
+
+\begin_layout Standard
+Final maximum Courant number, 0.9 (
+\begin_inset Formula $\Delta t=5s$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $\partial p/\partial x$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $\nabla\times\nabla p=0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+includegraphics[width=0.49
+\backslash
+linewidth]{../../../2014/WCCM/talk/graphics/bubbleRising_hill_save_dt5_cubicUpCPCFit_d
+pdx_CN_animations_meshTheta_5.pdf}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+animategraphics[width=0.49
+\backslash
+linewidth,controls,poster=first]{5}{../../../2014/WCCM/talk/graphics/bubbleRising_hill
+_save_dt5_cubicUpCPCFit_H_CN_animations_meshTheta_}{0}{5}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Stably Stratified Flow Over Orography 
+\series medium
+\size normal
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Kle11"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Atmosphere initially at rest should remain at rest.
+ Potential temperature, 
+\begin_inset Formula $\theta$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/vSlice/restingScharKlemp/BTF/0_H/theta.pdf
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/vSlice/restingScharKlemp/BTF/legends/theta.eps
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Spurious vertical velocity as a function of time
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+My results (
+\begin_inset Formula $\Delta t=100$
+\end_inset
+
+s)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+From 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kle11"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/vSlice/restingScharKlemp/plots/w.pdf
+	width 49line%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/latex/myPapers/ExnerFoam/version2/figs/Kle11_fig4_2.png
+	lyxscale 50
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+A Test Case to Challenge Cut Cells
+\end_layout
+
+\begin_layout Standard
+See James Shaw's poster and 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+after " (MWR, 2016)"
+key "SW16"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Terrain following wind
+\end_layout
+
+\begin_layout Itemize
+Advection of a stratified tracer: initial conditions
+\end_layout
+
+\begin_layout Itemize
+Analytic solution available
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename James/thermalAdvection-initial.png
+	lyxscale 10
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+A Test Case to Challenge Cut Cells
+\end_layout
+
+\begin_layout Standard
+See James Shaw's poster and 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+after " (MWR, 2016)"
+key "SW16"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Steady state solution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename James/thermalAdvection-steadyState.png
+	lyxscale 10
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Errors on a Terrain Following Grid
+\end_layout
+
+\begin_layout Itemize
+Flow and grid are aligned
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ very low errors
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename James/thermalAdvection-btf.png
+	lyxscale 10
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+A new type of Cut Cell Grid
+\end_layout
+
+\begin_layout Itemize
+Very simple grid construction algorithm
+\end_layout
+
+\begin_layout Itemize
+Avoids cells which are small in the direction of flow
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename James/thermalAdvection-slantedCell.png
+	lyxscale 10
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Conclusions
+\end_layout
+
+\begin_layout Itemize
+Spurious curl from pressure gradient leads to spurious vorticity sources
+ in the vertical over orography 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Avoided by using curl-free pressure gradients over orography
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Accurate rising bubble over orography despite distorted mesh
+\end_layout
+
+\begin_layout Itemize
+Stable stratification over orography despite distorted mesh
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Slanted cells - new type of cut cell grid
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Very simple construction algorithm, generalisable to arbitrary shaped cells
+ in 3D
+\end_layout
+
+\begin_layout Itemize
+Avoids cells which are small in the direction of flow
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+New advection test case with analytic solution to challenge cut cell grids
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+The End
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\end_body
+\end_document

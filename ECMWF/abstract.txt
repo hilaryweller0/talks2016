@@ -1,0 +1,24 @@
+The workshop aims to bring together scientists working on the various aspects of model development. In particular, interdisciplinary research and progress on numerical schemes, parallel and energy-efficient computing, coupling of resolved/subgrid-scale parametrised processes and multiscale interactions that could be relevant for numerical weather prediction are welcome.
+
+Possibilities:
+
+Curl-free pressure gradients
+
+Monge Ampere on the sphere
+
+Phil - moving meshes over orography
+
+James - cut cells and multi-d advection
+
+Me - Long time-step advection
+
+ Abstracts can be uploaded during online registration or after registration by returning to the registration form and clicking the link 'view your previous submissions'.
+
+The abstract should not exceed 300 words. Please include the following:
+
+    title (in bold)
+    list of authors (presenting author underlined),
+    affiliation
+    Indicate the preferred presentation type (oral or poster).
+
+ 

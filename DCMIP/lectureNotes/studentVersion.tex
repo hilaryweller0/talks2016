@@ -1,0 +1,112 @@
+% Package to provide \opttext{text} and \optparagraph{text} commands
+% that display the text in red, but if \studentversion is called at
+% the start of the document then a gap the same size as the text will
+% be left instead. The first is for short expanses of text (e.g. table
+% entries) while the second is for paragraphs (including
+% equations). Unfortunately it is not possible to have paragraph
+% breaks in "text"; you need eto call \optparagraph twice.
+\usepackage{ifthen}
+\usepackage{color,comment}
+
+\newboolean{@studentversion}\setboolean{@studentversion}{false}
+\newboolean{@onlineversion}\setboolean{@onlineversion}{false}
+\newboolean{@testversion}\setboolean{@testversion}{false}
+
+% Command to turn on the student version of the document
+\newcommand{\studentversion}{\setboolean{@studentversion}{true}}
+% Command to turn on the online version of the document
+\newcommand{\onlineversion}{\setboolean{@onlineversion}{true}}
+% Command to turn on the test online version of the document
+\newcommand{\testversion}{\setboolean{@testversion}{true}}
+%VERSION
+
+\ifthenelse{\boolean{@onlineversion} \OR \boolean{@testversion}}
+           {\usepackage[display]{texpower}}
+           {\usepackage[printout]{texpower}}
+
+% The \opttext command - step through for test version, leave gap for
+% student version
+\newcommand{\opttext}[1]{%
+    \ifthenelse{\boolean{@testversion}}%
+    {% Test version, so step (using texpower)
+        \step{{\color{red} #1}}%
+    }%
+    {%
+        \ifthenelse{\boolean{@studentversion}}%
+        {% Student version so leave a gap
+            %\phantom{#1}%
+            {\color{white} #1}%
+        }%
+        {%
+            \ifthenelse{\boolean{@onlineversion}}%
+            {% online version so step
+                \step{#1}
+            }%
+            {% lecturer version, text in red
+                {\color{red} #1}%
+            }%
+        }%
+    }%
+}
+
+% The \lecText command - blank for student version and online version
+\newcommand{\lecText}[1]{%
+    \ifthenelse{\boolean{@studentversion} \OR \boolean{@onlineversion}}%
+    {% Student version - leave gap
+        %\phantom{#1}%
+        {\color{white} #1}%
+    }%
+    {% lecturer version, text in red
+        {\color{red} #1}%
+    }%
+}
+
+% The \optparagraph command
+\newcommand{\optparagraph}[1]{%
+    \ifthenelse{\boolean{@testversion}}%
+    {% test version so pause before displaying in red
+        \liststepwise{\color{red} \step{#1}}%
+    }
+    {
+        \ifthenelse{\boolean{@studentversion} \OR \boolean{@onlineversion}}%
+        {% We are in the student version so use the \phantom command to
+         % leave a gap.  Note the paragraph spaces!
+            \noindent\phantom{\parbox{\linewidth}{\vskip -1pt #1 \vskip -1pt}}%
+        }%
+        {% lecturer version, in red
+            {\color{red}\noindent\parbox{\linewidth}%
+                       {\vskip -1pt #1 \vskip -1pt}}%
+        }
+    }%
+}
+
+% The \printOnly command
+% text only appears on printed version or test version
+\newcommand{\printOnly}[1]{%
+    \ifthenelse{\boolean{@onlineversion}}%
+    {% Online or beamer version so use the \phantom command to
+     % leave a gap.  Note the paragraph spaces!
+        \noindent\phantom{\parbox{\linewidth}{\vskip -1pt #1 \vskip -1pt}}%
+    }%
+    {% print version, so display in black (student) or red (lecturer)
+        \ifthenelse{\boolean{@studentversion}}%
+        {%
+            \noindent\parbox{\linewidth}{\vskip -1pt #1 \vskip -1pt}%
+        }%
+        {% lecturer version or test version, in red
+            {\color{red}\noindent\parbox{\linewidth}%
+                       {\vskip -1pt #1 \vskip -1pt}}%
+        }%
+    }%
+}
+
+% The optpage command
+\newcommand{\optpage}[1]
+{
+    \clearpage
+    \ifthenelse{\boolean{@studentversion}}
+        {}
+        {#1 \clearpage}
+}
+
+

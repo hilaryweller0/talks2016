@@ -1,0 +1,203 @@
+\usepackage{listings}
+%\lstset{language=Python, basicstyle=\small\ttfamily,
+%               showstringspaces=false,tabsize=4,
+%               keepspaces=true,columns=fixed,belowskip=0pt,aboveskip=0pt}
+\lstset{language=Python,basicstyle=\small,showstringspaces=false,tabsize=4,
+               keepspaces=true,columns=fullflexible,belowskip=0pt,aboveskip=0pt}
+
+\usepackage{courier}
+
+%% Control space around equations
+%\expandafter\def\expandafter\normalsize\expandafter{%
+%    \normalsize
+%    \setlength\abovedisplayskip{8pt}
+%    \setlength\belowdisplayskip{8pt}
+%    \setlength\abovedisplayshortskip{4pt}
+%    \setlength\belowdisplayshortskip{4pt}
+%}
+
+% remove space around centred text
+\let\oldcenter\center
+\let\oldendcenter\endcenter
+\renewenvironment{center}{\setlength\topsep{-1pt}\oldcenter}{\oldendcenter}
+
+% ragged right in main text and in minipages
+\AtBeginDocument{\raggedright}
+\makeatletter
+\let\@minipagerestore=\raggedright
+\makeatother
+
+%\usepackage{amsmath,mathtools,amsfonts,amssymb,bm}
+
+\RequirePackage{tabulary}
+\RequirePackage{multirow}
+\RequirePackage{multicol}
+\RequirePackage[normalem]{ulem}
+\renewcommand\arraystretch{1.5}
+\RequirePackage{subfig}
+\RequirePackage{rotating}
+
+% some shorthands
+\newcommand{\de}{\ensuremath{^\circ}}
+\newcommand{\ie}{\ensuremath{i.e.}}
+\newcommand{\eg}{\ensuremath{eg.}}
+\newcommand{\dof}{d.o.f.}
+\newcommand{\dofs}{d.o.f.s}
+\newcommand{\dprod} {\,{\scriptscriptstyle \stackrel{\bullet}{{}}}\,}
+\renewcommand{\vec}[1] {\ensuremath{\mathbf #1}}
+\newcommand{\gvec}[1] {\ensuremath{\mbox{\boldmath$\bf#1$}}}
+\newcommand{\eqn}[1]{\mbox{$#1$}}
+\newcommand{\half}{{\ensuremath{^1\negthickspace/\negthinspace_2}}}
+
+% make $\times$, $+$, $-$ and $=$ use less space
+\newcommand{\tims}{\negthinspace \times \negthinspace}
+\newcommand{\eq}{\negthinspace = \negthinspace}
+\newcommand{\plus}{\negthinspace + \negthinspace}
+\newcommand{\minus}{\negthinspace - \negthinspace}
+
+% maths packages
+\usepackage[makeroom]{cancel}
+
+% referencing of equation numbers
+\newcommand{\eqnRef}[1]{equation (\ref{#1})}
+\newcommand{\EqnRef}[1]{Equation (\ref{#1})}
+
+% redefine normalize with different display skips
+\makeatletter
+\renewcommand\normalsize{%
+   \@setfontsize\normalsize\@xpt\@xiipt
+   \abovedisplayskip 6\p@ \@plus2\p@ \@minus5\p@
+   \abovedisplayshortskip \z@ \@plus3\p@ \@minus3\p@
+   \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+   \belowdisplayskip \abovedisplayskip
+   \let\@listi\@listI}
+\makeatother
+
+% space around figures
+\setlength{\belowcaptionskip}{-10pt}
+
+% correct way of changing the enumi so that you refer to it properly
+%\renewcommand{\theenumi}{\roman{enumi}}
+\renewcommand{\labelenumi}{\theenumi.}
+
+%%% modifications to make report style more compact
+\makeatletter
+
+%\renewcommand\chaptername{Lecture}
+\everymath{\displaystyle}
+
+\def\@makechapterhead#1{
+  \clearpage
+%  \thispagestyle{empty}
+  \vspace*{-30pt}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \Large\bfseries \@chapapp\space \thechapter
+        :\space
+        %\vskip 20\p@
+    \fi
+    \interlinepenalty\@M
+    \Large \bfseries #1\par\nobreak
+    %\vskip 6\p@
+  }}
+\def\@makeschapterhead#1{%
+  \vspace*{-30\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \Large \bfseries  #1\par\nobreak
+    \vskip 6\p@
+  }}
+
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%%\renewcommand{\chaptermark}[1]{\chead[]%{\footnotesize\thechapter\space#1}}
+%\lhead[]{}
+%\rhead{\footnotesize\thepage}
+%\cfoot[]{}
+%\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrulewidth}{0pt}
+
+
+
+\def\@part[#1]#2
+{
+    \refstepcounter{part}
+    {
+        \parindent \z@ \raggedright \interlinepenalty \@M
+        \normalfont \Large\bfseries
+        \partname\nobreakspace\thepart : \nobreakspace #2 %\markboth{}{}\par
+    }
+    \nobreak \vskip 1.3ex \@afterheading
+}
+\renewcommand\section%
+{%
+    \@startsection {section}{1}{\z@}{0.01ex \@plus 0.01ex \@minus 0.5ex}%
+   {0.001ex \@plus .001ex \@minus 0.5ex}{\large\bfseries\raggedright}%
+}
+\renewcommand\subsection%
+{%
+    \@startsection {subsection}{2}{\z@}{0.01ex \@plus 0.01ex \@minus 0.5ex}%
+   {0.001ex \@plus.001ex \@minus 0.5ex}{\normalfont\bfseries\raggedright}%
+}
+\renewcommand\subsubsection%
+{%
+    \@startsection {subsubsection}{3}{\z@}{0.01ex \@plus 0.01ex \@minus .5ex}%
+   {0.001ex \@plus .001ex \@minus 0.5ex}{\normalfont\bfseries\raggedright}%
+}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                    {0.02ex \@plus0.01ex \@minus.02ex}%
+                                    {0.01em}%
+                                    {\normalfont\normalsize\bfseries}}
+
+
+\makeatother
+
+\RequirePackage{tweaklist}
+\renewcommand{\itemhook}
+{
+    \raggedright
+    \setlength{\topsep}{3pt}
+    \setlength{\parskip}{3pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\itemsep}{3pt}
+    \setlength{\labelwidth}{10pt}
+    \setlength{\leftmargin}{\labelwidth}
+}
+
+\renewcommand{\enumhook}
+{
+    \raggedright
+    \setlength{\topsep}{3pt}
+    \setlength{\parskip}{3pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\itemsep}{3pt}
+    \setlength{\labelwidth}{10pt}
+    \setlength{\leftmargin}{\labelwidth}
+}
+
+% text placement around floats
+\renewcommand{\floatpagefraction}{0.95}
+\renewcommand{\textfraction}{0}
+\renewcommand{\topfraction}{1}
+\renewcommand{\bottomfraction}{1}
+
+% paths where external graphics are
+\graphicspath{{/home/hilary/latex/teaching/topics/Fourier/}
+              {/home/hilary/latex/teaching/topics/}
+              {/home/hilary/latex/teaching/topics/otherAdvectionSchemes/}
+              {/home/hilary/latex/teaching/MPECDT/PDEsNumerics/2015/notes/}
+              {/home/hilary/latex/teaching/topics/Dispersion/}}
+\makeatletter
+\def\input@path{{/home/hilary/latex/teaching/topics/Fourier/}
+                {/home/hilary/latex/teaching/topics/Dispersion/}
+                {/home/hilary/latex/teaching/topics/}}
+\makeatother
+\renewcommand{\descriptionlabel}[1]{\parbox{\leftmargin}{\raggedleft #1.~}}
+
+% animations
+%\RequirePackage{animate}
+%\let\stepMovie\movie
+\RequirePackage{multimedia}
+\let\mediaMovie\movie
+\let\movie=\undefined

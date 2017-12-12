@@ -1,0 +1,2491 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\usepackage{animate}
+
+% hack to get natbib working with beamer
+\renewcommand{\newblock}{}
+
+% list modifications
+\setlength{\leftmargini}{0em}
+\setlength{\leftmarginii}{1em}
+
+% make $\times$, $+$, $-$ and $=$ use less space
+\newcommand{\tims}{\negthinspace \times \negthinspace}
+\newcommand{\eq}{\negthinspace = \negthinspace}
+\newcommand{\plus}{\negthinspace + \negthinspace}
+\newcommand{\minus}{\text{-}}
+\newcommand{\smallcdot}{\negthinspace \cdot \negthinspace}
+
+\newcommand{\nicefrac}[2]{\ensuremath ^{#1}\!\!/\!_{#2}}
+\usepackage { fancybox}
+
+\setlength{\tabcolsep}{2pt}
+\end_preamble
+\options serif
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman times
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref section
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Optimally transported meshes on the Sphere for Global Atmospheric Modelling
+\begin_inset VSpace -0.5cm*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Hilary Weller, Phil Browne, Chris Budd and Mike Cullen
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/hilary/graphics/MetLogo.png
+	lyxscale 20
+	scale 20
+
+\end_inset
+
+
+\begin_inset VSpace -0.7cm*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Date
+April 2016
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+r-Adaptivity
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color blue
+R
+\series default
+\color inherit
+edistribution, keeping mesh topology fixed
+\end_layout
+
+\begin_layout Itemize
+Deform mesh based on a monitor function
+\end_layout
+
+\begin_layout Itemize
+Why? 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+No load balancing problems
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+No need to map solution between meshes
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Retro-fit to existing codes
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Who not?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Distorted meshes
+\end_layout
+
+\begin_layout Itemize
+Never have complete control of 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+, 
+\begin_inset Formula $\Delta y$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta z$
+\end_inset
+
+ independently
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+How?
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Optimally Transported Meshes in Euclidean Geometry 
+\end_layout
+
+\begin_layout Itemize
+How to create a mesh which is equidistributed with respect to a monitor
+ function.
+ ie
+\begin_inset Formula 
+\[
+A_{x}m\left(\mathbf{x}\right)=\text{const}
+\]
+
+\end_inset
+
+ for each cell with area 
+\begin_inset Formula $A_{x}$
+\end_inset
+
+ for mesh monitor function 
+\begin_inset Formula $m\left(\mathbf{x}\right)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Define a map from old mesh point, 
+\begin_inset Formula $\bm{\xi}_{i}$
+\end_inset
+
+, to new mesh points, 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+ which is the gradient of a convex potential, 
+\begin_inset Formula $\phi$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathbf{x}=\bm{\xi}+\nabla\phi
+\]
+
+\end_inset
+
+This leads to an 
+\series bold
+
+\begin_inset Quotes eld
+\end_inset
+
+optimally transported mesh
+\begin_inset Quotes erd
+\end_inset
+
+
+\series default
+, free of tangling
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The Jacobian determinant of the mesh transform is the change in area of
+ the cells:
+\begin_inset Formula 
+\[
+|\nabla\mathbf{x}|=A_{x}/A_{\xi}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Combine these to form a Monge-Amp
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+'e
+\end_layout
+
+\end_inset
+
+re equation for the mesh potential, 
+\begin_inset Formula $\phi$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{eqnarray*}
+|\nabla\left(\bm{\xi}+\nabla\phi\right)|m\left(\mathbf{x}\right) & = & \text{const}\\
+\text{or }\ |I+H\left(\phi\right)| & = & \frac{\text{const}}{m\left(\mathbf{x}\right)}
+\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+This works fine in Euclidean geometry ...
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Numerical Solution of the Monge-Ampère Equation on a Plane 
+\series medium
+\size normal
+(test case from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "BRW15"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Monitor Function, 
+\begin_inset Formula $m$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Initial Mesh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Solution of 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $|I+H\left(\phi\right)|m\left(\mathbf{x}\right)=\text{const}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/meshes/plane/BuddRusselWalsh/Fig4.4_V0_moreDiags/1/monitor.pdf
+	lyxscale 50
+	width 33text%
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/meshes/plane/BuddRusselWalsh/blankCaseFig4.4_V0/constant/meshAll.pdf
+	lyxscale 50
+	width 33text%
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/meshes/plane/BuddRusselWalsh/Fig4.4_V0_moreDiags/1/Phi.pdf
+	lyxscale 50
+	width 33text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Initial Mesh + 
+\begin_inset Formula $\nabla\phi$
+\end_inset
+
+ gives an equidistributed mesh
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Initial Mesh, 
+\begin_inset Formula $\bm{\xi}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $+\nabla\phi$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+=
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/meshes/plane/BuddRusselWalsh/blankCaseFig4.4_V0/constant/meshAll.pdf
+	lyxscale 50
+	width 33text%
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/meshes/plane/BuddRusselWalsh/Fig4.4_V0_moreDiags/1/Phi.pdf
+	lyxscale 50
+	width 33text%
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/meshes/plane/BuddRusselWalsh/Fig4.4_V0_moreDiags/1/meshAll.pdf
+	lyxscale 50
+	width 33text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+But on the Surface of a Sphere
+\end_layout
+
+\begin_layout Itemize
+The gradient of a potential does not map to another point on the sphere
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\therefore$
+\end_inset
+
+ cannot formulate a Monge-Ampère equation for the mesh pontential
+\end_layout
+
+\begin_layout Standard
+Instead:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Use exponential maps to map from old to new mesh:
+\begin_inset Formula 
+\[
+\mathbf{x}=\bm{\xi}+\exp_{\xi}\nabla\phi
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Solve the optimal transport problem more directly:
+\begin_inset Formula 
+\begin{equation}
+\frac{A_{x}}{A_{\xi}}=\frac{\text{const}}{m\left(\mathbf{x}\right)}\label{eq:MAsphere}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+How?
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Informed by the Euclidean case, linearise eqn (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MAsphere"
+
+\end_inset
+
+) (assuming tangent plane):
+\begin_inset Formula 
+\[
+\frac{A_{x}}{A_{\xi}}\approx|I+H\left(\phi\right)|\approx\pause1+\nabla^{2}\phi
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+and create Poincaré iterations (with iteration counter 
+\begin_inset Formula $n$
+\end_inset
+
+) with non-linear terms treated explicitly:
+\begin_inset Formula 
+\[
+1+\nabla^{2}\phi^{n+1}=1+\nabla^{2}\phi^{n}-\frac{A_{x}}{A_{\xi}}+\frac{\text{const}^{n}}{m\left(\mathbf{x}^{n}\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Iterative Solution
+\end_layout
+
+\begin_layout Standard
+This is unstable if the non-linear terms are too big.
+ Therefore under-relax:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\alpha\nabla^{2}\phi^{\left(n+1\right)}=\alpha\nabla^{2}\phi^{\left(n\right)}-\frac{A_{x}}{A_{\xi}}+\frac{\text{const}^{n}}{m\left(\mathbf{x}^{n}\right)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha>1$
+\end_inset
+
+.
+ How to find 
+\begin_inset Formula $\alpha$
+\end_inset
+
+?
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\alpha^{n+1}=\max\left(\alpha^{n},\ 4\max\left(^{1}\!\!/\!_{4},\ \max\left(\left|\frac{A_{x}}{A_{\xi}}-\frac{\text{const}^{n}}{m\left(\mathbf{x}^{n}\right)}\right|\right)\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Spatial Discretisation
+\end_layout
+
+\begin_layout Itemize
+A standard finite volume discretisation for 
+\begin_inset Formula $\nabla^{2}\phi$
+\end_inset
+
+ on an arbitrary mesh:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset External
+	template XFig
+	filename figs/FVlaplacian.fig
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nabla^{2}\phi\approx\frac{1}{A_{\xi}}\sum_{\text{edges}}\frac{\phi_{N}-\phi_{C}}{d}\ell$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+No discretisation needed for 
+\begin_inset Formula $A_{x}/A_{\xi}$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Solution is very sensitive to the discretisation of 
+\begin_inset Formula $\nabla\phi$
+\end_inset
+
+ (at the vertices)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Least squares fit using values of 
+\begin_inset Formula $\phi$
+\end_inset
+
+ at 6 hexagons around a vertex
+\end_layout
+
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+An Optimally Transported Mesh
+\end_layout
+
+\begin_layout Standard
+Given the monitor function on the sphere:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/meshes/sphereMeshes/MongeAmpereV1MedStencil/4/8/0/monitor.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+An Optimally Transported Mesh
+\end_layout
+
+\begin_layout Standard
+The optimally transported mesh is calculated iteratively:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+animategraphics[width=
+\backslash
+linewidth,controls,every=2,poster=first]{3}{/home/hilary/OpenFOAM/hilary-2.3.0/run
+/meshes/sphereMeshes/MongeAmpereV1MedStencil/4/8anim/movie/mesh}{0}{100}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Compared with Lloyd's Algorithm
+\end_layout
+
+\begin_layout Standard
+Iterative Mesh Optimisation using Lloyd's algorithm
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/meshes/sphereMeshes/RinglerLloyd/4/8/0/meshH.pdf
+	width 100line%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Shallow Water Flow Over a Mountain
+\end_layout
+
+\begin_layout Standard
+Errors after 15 days using a static Lloyd algorithm mesh versus a static
+ optimally transported mesh using the hexagonal C-grid 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "RTSK10"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lloyd
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Optimally transported
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/latex/meetings/2014/SIAMstudent/graphics/WilliMountain_RinglerLloyd_5_4_0_h0.pdf
+	width 48text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/latex/meetings/2014/SIAMstudent/graphics/WilliMountain_MongeAmpereV1_5_4_0_h0.pdf
+	width 48text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/latex/meetings/2014/SIAMstudent/graphics/WilliMountain_RinglerLloyd_5_4_1296000_hError100.png
+	lyxscale 50
+	width 48text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/latex/meetings/2014/SIAMstudent/graphics/WilliMountain_MongeAmpereV1_5_4_1296000_hError100.png
+	lyxscale 50
+	width 48text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Precipitation as a Monitor Function
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -10pt
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+\begin_inset Formula 
+\[
+m=\frac{p+p_{\min}}{p_{\max}+p_{min}}\ \text{where}\ p_{\min}=10^{-5}\text{kg}\text{m}^{-2}\text{s}^{-1},\ p_{\max}=8.73\times10^{-4}\text{kg}\text{m}^{-2}\text{s}^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+animategraphics[width=
+\backslash
+linewidth,controls,poster=first,loop]{1}{/home/hilary/OpenFOAM/hilary-2.3.0/run/me
+shes/sphereMeshes/MongeAmpereFromPpt/6/movie/pptMesh}{0}{11}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\lang british
+Using daily average precipitation rate, 1-12 Oct 2012, from the NOAA-CIRES
+ 20th Century Reanalysis version 2 (Compo et al, 2011, 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.esrl.noaa.gov/psd/data/gridded/data.20thC_ReanV2.html
+\end_layout
+
+\end_inset
+
+)
+\begin_inset VSpace vfill
+\end_inset
+
+See 
+\begin_inset CommandInset citation
+LatexCommand citet*
+key "WBBC16"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Conclusions so far ...
+\end_layout
+
+\begin_layout Standard
+
+\size large
+\color blue
+Monge-Amp
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+'e
+\end_layout
+
+\end_inset
+
+re Equation on the Sphere
+\end_layout
+
+\begin_layout Itemize
+Exponential maps used to create optimally transported meshes on the sphere
+\end_layout
+
+\begin_layout Itemize
+New linearisation to create a semi-implicit algorithm
+\end_layout
+
+\begin_layout Itemize
+Generates meshes similar to Lloyd's algorithm but faster
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Not fast enough ...
+ too many iterations to find the optimally transported meshes
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Numerical Solution Techniques for the Monge-Amp
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+'e
+\end_layout
+
+\end_inset
+
+re Equation
+\end_layout
+
+\begin_layout Itemize
+On the sphere we have used 
+\shape italic
+\color red
+fixed-point iterations
+\shape default
+\color inherit
+:
+\begin_inset Formula 
+\[
+\alpha\nabla^{2}\phi^{\left(n+1\right)}=\alpha\nabla^{2}\phi^{\left(n\right)}-|I+H(\phi^{n})|+\frac{\text{const}^{n}}{m\left(\mathbf{x}^{n}\right)}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset CommandInset citation
+LatexCommand citet
+key "BW06"
+
+\end_inset
+
+ proposed solving a
+\shape italic
+\color red
+ Parabolic Monge-Amp
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+'e
+\end_layout
+
+\end_inset
+
+re Equation
+\shape default
+\color inherit
+:
+\begin_inset Formula 
+\[
+\frac{\partial\phi}{\partial t}-\gamma\frac{\partial\nabla^{2}\phi}{\partial t}=\left(\left|I+H\left(\phi\right)\right|m\left(\mathbf{x}\right)\right)^{1/d}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I will also describe
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+\color red
+Fixed-point iterations with adaptive linearisation
+\end_layout
+
+\begin_layout Itemize
+A 
+\shape italic
+\color red
+Newton method
+\end_layout
+
+\begin_layout Standard
+In Euclidean Geometry (work on the sphere to follow)
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Fixed-point Iterations with Adaptive Linearisation
+\end_layout
+
+\begin_layout Itemize
+For the fixed-point iterations, we used 
+\begin_inset Formula $|I+H(\phi)|\approx1+\nabla^{2}\phi$
+\end_inset
+
+ which was derived by linearising about 
+\begin_inset Formula $\phi=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Instead linearise about the previous iteration
+\begin_inset Formula 
+\[
+\phi^{n+1}\approx\phi^{n}+\phi^{\prime}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+which gives:
+\begin_inset space \hspace{}
+\length 2cm
+\end_inset
+
+
+\begin_inset Formula $|I+H(\phi^{n+1})|\approx|I+H(\phi^{n})|+\nabla\cdot A^{n}\nabla\phi^{\prime}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+where 
+\begin_inset Formula $A^{n}=\left(\begin{array}{cc}
+1+\phi_{yy}^{n} & -\phi_{xy}^{n}\\
+-\phi_{xy}^{n} & 1+\phi_{xx}^{n}
+\end{array}\right)$
+\end_inset
+
+ in 2D Euclidean geometry.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+So instead we solve for 
+\begin_inset Formula $\phi^{\prime}$
+\end_inset
+
+ and the fixed-point iterations become:
+\begin_inset Formula 
+\[
+\nabla\cdot A^{n}\nabla\phi^{\prime}=-|I+H(\phi^{n})|+\frac{\text{const}^{n}}{m(\mathbf{x}^{n})}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+To ensure that this equation remains elliptic, we may need to modify 
+\begin_inset Formula $A$
+\end_inset
+
+ to force it to be definite (all positive eigenvalues):
+\begin_inset Formula 
+\[
+B^{n}=A^{n}+\gamma I\ \text{ where }\ \gamma=\begin{cases}
+0 & \text{ if }\min\sigma[A^{n}]>0\\
+\varepsilon-\min\sigma[A^{n}] & \text{ if }\min\sigma[A^{n}]\le0
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+This is nearly a Newton solver ...
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Newton Solver
+\end_layout
+
+\begin_layout Itemize
+The adaptive fixed-point iterations are:
+\begin_inset Formula 
+\begin{equation}
+\nabla\cdot A^{n}\nabla\phi^{\prime}=-|I+H(\phi^{n})|+\frac{\text{const}}{m(\mathbf{x})}\label{eq:AFP}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+To make this into a Newton solver we also need to linearise the 
+\begin_inset Formula $\frac{c}{m(\mathbf{x})}$
+\end_inset
+
+ term:
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{c}{m}\left(\mathbf{x}^{n+1}\right) & \approx & \frac{c}{m}\left(\mathbf{x}^{n}\right)+\nabla_{x}\left(\frac{c}{m}\left(\mathbf{x}^{n}\right)\right)\cdot\left(\mathbf{x}^{n+1}-\mathbf{x}^{n}\right)\\
+ & = & \frac{c}{m}\left(\mathbf{x}^{n}\right)+\nabla_{x}\left(\frac{c}{m}\left(\mathbf{x}^{n}\right)\right)\cdot\nabla\phi^{\prime}
+\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Substituting into eqn(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AFP"
+
+\end_inset
+
+) gives
+\begin_inset Formula 
+\begin{equation}
+\nabla\cdot A^{n}\nabla\phi^{\prime}=-|I+H(\phi^{n})|+\frac{c}{m}\left(\mathbf{x}^{n}\right)+\nabla_{x}\left(\frac{c}{m}\left(\mathbf{x}^{n}\right)\right)\cdot\nabla\phi^{\prime}\label{eq:Newton}
+\end{equation}
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+which is like an advection-diffusion equation for 
+\begin_inset Formula $\phi^{\prime}$
+\end_inset
+
+ with tensorial diffusion 
+\begin_inset Formula $A^{n}$
+\end_inset
+
+ and advecting velocity 
+\begin_inset Formula $\nabla_{x}\left(\frac{c}{m}\left(\mathbf{x}^{n}\right)\right)$
+\end_inset
+
+.
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Eqn (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Newton"
+
+\end_inset
+
+) is a linear equation for 
+\begin_inset Formula $\phi^{\prime}$
+\end_inset
+
+ which is straightforward to solve (after spatial discretisation)
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+First Results of Newton Method
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Monitor function, 
+\begin_inset Formula $m$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\phi$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla\phi$
+\end_inset
+
+ after 1 iteration
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/AtmosFOAM-3.0.1/run/MongeAmpere/NEWTON2D-vectorGradc_m/save/60x60_bell_NewtonLinear_gradcmDown/150/monitor.pdf
+	lyxscale 50
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/AtmosFOAM-3.0.1/run/MongeAmpere/NEWTON2D-vectorGradc_m/save/60x60_bell_NewtonLinear_gradcmDown_setRef/1/Phi.pdf
+	lyxscale 50
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+First Results of Newton Method
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\phi$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla\phi$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\nabla^{2}\frac{c}{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla\frac{c}{m}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/AtmosFOAM-3.0.1/run/MongeAmpere/NEWTON2D-vectorGradc_m/save/60x60_bell_NewtonLinear_gradcmDown_setRef/1/Phi.pdf
+	lyxscale 50
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/AtmosFOAM-3.0.1/run/MongeAmpere/NEWTON2D-vectorGradc_m/save/60x60_bell_NewtonLinear_gradcmDown_setRef/1/lapc_m.pdf
+	lyxscale 50
+	width 49text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Results of Test Cases
+\end_layout
+
+\begin_layout Standard
+All techniques converge to the same solutions
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $m=1+10\ \text{sech}^{2}\left(200\left(|\mathbf{x}|^{2}-0.25^{2}\right)\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $m=50+10\ \text{sech}^{2}\left(100\ |\mathbf{x}|^{2}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/meshes/plane/BuddRusselWalsh/Fig4.4_V0/0/meshAll.pdf
+	lyxscale 50
+	width 48text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/hilary/OpenFOAM/hilary-2.3.0/run/meshes/plane/BuddRusselWalsh/Fig4.5_V0/0/meshAll.pdf
+	lyxscale 50
+	width 48text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ring mesh
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Bell mesh
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+But how fast do they converge ...
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Results for the Ring Mesh
+\end_layout
+
+\begin_layout Standard
+Number of Iterations to Convergence (measured by variance of equidistribution,
+ 
+\begin_inset Formula $m|I+H(\phi)|$
+\end_inset
+
+ )
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/Dropbox/PhilHilary/MA_iterative_images/equi_vs_iter_ring_PMA_Newt.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Results for the Ring Mesh
+\end_layout
+
+\begin_layout Standard
+Number of Iterations to Convergence (measured by variance of equidistribution,
+ 
+\begin_inset Formula $m|I+H(\phi)|$
+\end_inset
+
+ )
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/Dropbox/PhilHilary/MA_iterative_images/equi_vs_iter_ring_FP_Newt.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Results for the Bell Mesh
+\end_layout
+
+\begin_layout Standard
+Number of Iterations to Convergence (measured by variance of equidistribution,
+ 
+\begin_inset Formula $m|I+H(\phi)|$
+\end_inset
+
+ )
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/Dropbox/PhilHilary/MA_iterative_images/equi_vs_iter_bell_PMA_Newt.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Results for the Bell Mesh
+\end_layout
+
+\begin_layout Standard
+Number of Iterations to Convergence (measured by variance of equidistribution,
+ 
+\begin_inset Formula $m|I+H(\phi)|$
+\end_inset
+
+ )
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/Dropbox/PhilHilary/MA_iterative_images/equi_vs_iter_bell_FP_Newt.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Scaling With Problem Size for the Ring
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/Dropbox/PhilHilary/MA_iterative_images/tikz_scaling_ring_Newt.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Scaling With Problem Size for the Bell
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/hilary/Dropbox/PhilHilary/MA_iterative_images/tikz_scaling_bell_Newt.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Conclusions
+\end_layout
+
+\begin_layout Standard
+
+\size large
+\color blue
+Monge-Amp
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+'e
+\end_layout
+
+\end_inset
+
+re Equation on the Sphere
+\end_layout
+
+\begin_layout Itemize
+Exponential maps used to create optimally transported meshes on the sphere
+\end_layout
+
+\begin_layout Itemize
+New linearisation to create a semi-implicit algorithm
+\end_layout
+
+\begin_layout Itemize
+Generates meshes similar to Lloyd's algorithm but faster
+\end_layout
+
+\begin_layout Standard
+
+\size large
+\color blue
+Iterative Algorithms
+\size default
+\color inherit
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Iterations with adaptive linearisation are:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Faster than solution of Parabolic Monge-Amp
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+'e
+\end_layout
+
+\end_inset
+
+re equation
+\end_layout
+
+\begin_layout Itemize
+Faster than fixed point iterations linearising about zero
+\end_layout
+
+\begin_layout Itemize
+Not dependent on any free parameters 
+\end_layout
+
+\begin_layout Itemize
+Cost linearly dependent on problem size
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pause
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Newton method is:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Faster and slower than adaptive linearisation
+\end_layout
+
+\begin_layout Itemize
+Cost linearly dependent on problem size
+\end_layout
+
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "numerics"
+options "plainnat"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
